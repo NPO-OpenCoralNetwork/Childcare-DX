@@ -37,6 +37,10 @@ CORS_ALLOWED_ORIGINS = [
     'https://forcarer-361965a317c9.herokuapp.com',
     'https://www.forcarer.org'
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://forcarer-361965a317c9.herokuapp.com',
+    'https://www.forcarer.org']
+
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
 INSTALLED_APPS = [
