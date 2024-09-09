@@ -39,3 +39,6 @@ txaio==23.1.1
 typing_extensions==4.12.2
 tzdata==2024.1
 zope.interface==7.0.1
+django-heroku
+psycopg2-binary
+whitenoise
