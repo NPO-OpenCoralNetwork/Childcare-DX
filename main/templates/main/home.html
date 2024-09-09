@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<div class="home-container">
+
+    <!-- お知らせ枠 -->
+    <h2>お知らせ</h2>
+    <ul class="announcement-list" id="announcements" >
+        {% for announcement in announcements %}
+        <li class="announcement-item">        
+            <a href="{% url 'announcement_detail' announcement.pk %}" class="announcement-link">
+            {{ announcement.title }} - {{ announcement.date }}
+        </a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+        {% if announcements.has_previous %}
+            <a href="?page_announcement={{ announcements.previous_page_number }}#announcements">&laquo; 前へ</a>
+        {% endif %}
+        <span class="current">
+            ページ {{ announcements.number }} / {{ announcements.paginator.num_pages }}
+        </span>
+        {% if announcements.has_next %}
+            <a href="?page_announcement={{ announcements.next_page_number }}#announcements">次へ &raquo;</a>
+        {% endif %}
+        </span>
+    </div>
+</div>
+
+<div class="home-container" id="new_inquiries">
+    <h2>新しい相談</h2>
+    <ul class="inquiry-list">
+        {% for inquiry in new_inquiries %}
+        <li class="inquiry-item">
+            <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }} - {{ inquiry.created_at }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+        {% if new_inquiries.has_previous %}
+            <a href="?page_new={{ new_inquiries.previous_page_number }}#new_inquiries">&laquo; 前へ</a>
+        {% endif %}
+        <span class="current">
+            ページ {{ new_inquiries.number }} / {{ new_inquiries.paginator.num_pages }}
+        </span>
+        {% if new_inquiries.has_next %}
+            <a href="?page_new={{ new_inquiries.next_page_number }}#new_inquiries">次へ &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+
+<div class="home-container" id="popular_inquiries">
+    <h2>色々な相談</h2>
+    <ul class="inquiry-list">
+        {% for inquiry in popular_inquiries %}
+        <li class="inquiry-item">
+            <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a> 
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+        {% if popular_inquiries.has_previous %}
+            <a href="?page_popular={{ popular_inquiries.previous_page_number }}#popular_inquiries">&laquo; 前へ</a>
+        {% endif %}
+        <span class="current">
+            ページ {{ popular_inquiries.number }} / {{ popular_inquiries.paginator.num_pages }}
+        </span>
+        {% if popular_inquiries.has_next %}
+            <a href="?page_popular={{ popular_inquiries.next_page_number }}#popular_inquiries">次へ &raquo;</a>
+        {% endif %}
+        </span>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash) {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+</script>
+{% endblock %}

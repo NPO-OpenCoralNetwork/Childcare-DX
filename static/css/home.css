@@ -1,0 +1,125 @@
+/* 基本のスタイルは保持 */
+.home-container {
+    width: 60%;
+    background-color: #FFF6EC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+}
+
+h2 {
+    color: #4B4D37;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.inquiry-list, .announcement-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: large;
+    margin: 30px;
+}
+
+.inquiry-item, .announcement-item {
+    margin-bottom: 10px;
+}
+
+.inquiry-link, .announcement-link {
+    text-align: center;
+    text-decoration: none;
+    color: #D2986A;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 5px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.inquiry-link:hover, .announcement-item:hover {
+    background-color: #D2986A;
+    color: #FFF6EC;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 50px;
+}
+
+.pagination .step-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination .step-links a,
+.pagination .step-links .current {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #D2986A;
+    color: #FFF6EC;
+    transition: background-color 0.3s ease;
+}
+
+.pagination .step-links a:hover {
+    background-color: #B5784F;
+}
+
+/* レスポンシブ対応の追加 */
+/* タブレットサイズの対応 */
+@media (max-width: 768px) {
+    .home-container {
+        width: 80%;
+        padding: 15px;
+        margin: 50px auto;
+    }
+    h2 {
+        font-size: medium;
+    }
+    .inquiry-list, .announcement-list {
+        font-size: medium;
+        margin: 20px;
+    }
+
+    .inquiry-link, .announcement-link {
+        padding: 6px;
+    }
+
+    .pagination .step-links a,
+    .pagination .step-links .current {
+        padding: 5px 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* モバイルサイズの対応 */
+@media (max-width: 480px) {
+    .home-container {
+        width: 95%;
+        padding: 10px;
+        margin: 40px auto;
+    }
+    h2 {
+        font-size: medium;
+    }
+    .inquiry-list, .announcement-list {
+        font-size: small;
+        margin: 15px;
+    }
+
+    .inquiry-link, .announcement-link {
+        padding: 5px;
+    }
+
+    .pagination .step-links a,
+    .pagination .step-links .current {
+        padding: 4px 6px;
+        font-size: 0.8em;
+    }
+}

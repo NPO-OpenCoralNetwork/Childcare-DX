@@ -1,0 +1,222 @@
+.profile-container {
+    background-color: #FFF6EC; /* ベースカラー */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    max-width: 600px;
+    margin: 0 auto; /* 中央揃え */
+}
+
+h2 {
+    color: #4B4D37; /* テキストカラー */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+   text-align: center;
+   margin-bottom: 20px
+}
+
+.file-name-display {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.profile-image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 20px;
+}
+
+form .profile-image-url {
+    display: none; /* Hide the URL display */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    color: #4B4D37; /* テキストカラー */
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.clear-file-button {
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover{
+    background-color: #A16A4F; /* 少し暗いアクセントカラー */
+}
+
+.clear-file-button:hover,
+.clear-file-button.active { /* クリック後もホバー色を適用 */
+    background-color: #4B4D37; /* テキストカラー */
+}
+form .profile-image-url {
+    display: none; /* Hide the URL display */
+}
+form textarea,
+form select {
+    padding: 10px;
+    border: 1px solid #D2986A; /* アクセントカラー */
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    width: 100%;
+}
+
+.user-type-toggle {
+    margin-top: 20px;
+    
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+form button:hover {
+    background-color: #B5784F; /* アクセントカラーを少し暗く */
+}
+
+p {
+    font-size: large;
+    color: #4B4D37; /* テキストカラー */
+    margin-bottom: 20px;
+}
+
+.delete-section h3 {
+    color: #4B4D37;
+    margin-top: 30px;
+}
+
+.delete-section form {
+    text-align: center;
+}
+
+.inquiry-history {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #FFF6EC; /* ベースカラー */
+    border: 1px solid #D2986A; /* アクセントカラー */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.inquiry-history h3 {
+    color: #4B4D37; /* テキストカラー */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.inquiry-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.inquiry-history li {
+    padding: 10px;
+    border-bottom: 1px solid #D2986A; /* アクセントカラー */
+}
+
+.inquiry-history li:last-child {
+    border-bottom: none;
+}
+
+.inquiry-history a {
+    text-decoration: none;
+    color: #4B4D37; /* テキストカラー */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.inquiry-history a:hover {
+    color: #D2986A; /* アクセントカラー */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 15px;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        font-size: 0.9em;
+    }
+
+    form button {
+        font-size: 0.9em;
+    }
+
+    .inquiry-history {
+        padding: 8px;
+    }
+
+    .inquiry-history h3 {
+        font-size: 1.2em;
+    }
+
+    .inquiry-history li {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        font-size: 0.8em;
+    }
+
+    .inquiry-history h3 {
+        font-size: 1em;
+    }
+
+    .inquiry-history li {
+        padding: 6px;
+    }
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  返答詳細
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/response_detail.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="inquiry-container">
+    <h2>{{ inquiry.title }}</h2>
+    <p>{{ inquiry.content }}</p>
+    <div class="responses-container">
+        <h3>{{ profile_user.username }}さんの回答</h3>
+        <p>{{ response.content }}</p>
+        {% if response.user == user %}
+        <form method="post" class="delete-response-form">
+            {% csrf_token %}
+            <input type="hidden" name="delete_response_id" value="{{ response.id }}">
+            <button type="submit" name="delete_response" onclick="return confirm('本当に削除してよろしいですか？');">
+                この返答を削除
+            </button>
+        </form>
+        {% endif %} 
+    </div>
+</div>
+{% endblock %}

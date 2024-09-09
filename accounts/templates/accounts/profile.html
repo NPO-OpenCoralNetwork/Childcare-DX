@@ -1,0 +1,108 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}
+{{ user_profile.username }}さん
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<div class="profile-container">
+  <h2>{{ user_profile.username }}さんのプロフィール</h2>
+    <div class="profile-image">
+        <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
+    </div>
+  {% if is_owner %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+
+    {{ form.bio }}  
+
+    <div class="form-group">
+        <label for="id_profile_image" class="custom-file-upload" >プロフィール画像を変更</label>
+        <input type="file" name="profile_image" id="id_profile_image" style="display:none;" onchange="displayFileName()">
+        <span id="file-name" class="file-name-display"></span>
+        <button type="button" class="clear-file-button" onclick="clearFileInput()">クリア</button>
+    </div>
+  <button type="submit" name="save_profile">保存</button>
+</form>
+    <div class="user-type-toggle">
+      <form method="post">
+        {% csrf_token %}
+      <select name="user_type" id="user_type">
+        <option value="inquirer" {% if user_profile.user_type == 'inquirer' %}selected{% endif %}>相談者</option>
+        <option value="responder" {% if user_profile.user_type == 'responder' %}selected{% endif %}>回答者</option>
+      </select>
+      <button type="submit" name="change_user_type">ユーザータイプを変更</button>
+    </form>
+    </div>
+ 
+    
+ 
+
+  <div class="delete-section">
+    <form method="post">
+      {% csrf_token %}
+      <button
+        type="submit"
+        name="delete_account"
+        onclick="return confirm('本当に削除してよろしいですか');"
+      >
+        アカウント削除
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <p><strong>自己紹介</strong> {{ user_profile.bio }}</p>
+  {% if user.user_type != 'responder' and user_profile.user_type == 'responder' %}
+  <form method="post" action="{% url 'start_chat' pk=user_profile.pk %}">
+    {% csrf_token %}
+    <button type="submit">{{ user_profile.username }}さんと話す</button>
+  </form>
+  {% endif %} 
+  {% endif %}
+
+  {% if inquiries %}  
+  <div class="inquiry-history">
+    <h3>相談履歴</h3>
+    <ul>
+      {% for inquiry in inquiries %}
+      <li>
+        <a href="{% url 'inquiry_detail' inquiry.id %}">{{ inquiry.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if responses %}
+  <div class="inquiry-history">
+    <h3>回答履歴</h3>
+    <ul>
+        {% for response in responses %}
+        <li>
+          <a href="{% url 'response_detail' response.inquiry.id user_profile.id  %}">{{ response.inquiry.title }}</a>に対する回答
+        </li>
+        {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+<script>
+    function displayFileName() {
+        var input = document.getElementById('id_profile_image');
+        var fileNameDisplay = document.getElementById('file-name');
+        if (input.files && input.files[0]) {
+            fileNameDisplay.textContent = input.files[0].name;  // ファイル名を表示
+        } else {
+            fileNameDisplay.textContent = '';  // ファイルが選択されていない場合は空白
+        }
+    }
+
+    function clearFileInput() {
+        document.getElementById('id_profile_image').value = "";
+        document.getElementById('file-name').textContent = "";  // クリア時にファイル名も消す
+    }
+</script>
+{% endblock %}

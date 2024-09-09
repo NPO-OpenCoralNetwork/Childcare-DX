@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ケアラーのなやみ{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>ケアラーのなやみ</h1>
+            <button class="navbar-toggler" id="navbarToggle">&#9776;</button>
+            <nav id="sidebarMenu">
+                <ul>
+                    <li><a href="{% url 'home' %}">ホーム</a></li>
+                    <li><a href="{% url 'search_jigyousha' %}">高齢者介護事業所検索</a></li>
+                    <li><a href="{% url 'search_sjigyousha' %}">障碍者介護事業所検索</a></li>
+                    <li><a href="https://www.ncasa-japan.jp/you-do/treatment/treatment-map/">依存症専門事業所検索</a></li>
+                    <li><a href="{% url 'inquiry_list' %}">相談一覧</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' user.pk %}">マイプロフィール</a></li>
+                    <li><a href="{% url 'chat_list' %}">チャット</a></li>
+                    {% if user.user_type == 'responder' %}
+                    <li><a href="{% url 'saved_inquiries' %}">保存した相談</a></li>
+                    {% endif %}
+                    {% if user.user_type == 'inquirer' %}
+                    <li><a href="{% url 'inquiry_create' %}">相談を投稿</a></li>
+                    <li><a href="{% url 'saved_responses' %}">保存した返答</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">ログイン</a></li>
+                    <li><a href="{% url 'register' %}">新規登録</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            © 2024 かいごのなやみ
+        </footer>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggler = document.getElementById('navbarToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+
+        toggler.addEventListener('click', function () {
+            sidebarMenu.classList.toggle('show');
+            document.body.classList.toggle('sidebar-open');
+        });
+    });
+</script>
+</html>

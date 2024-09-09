@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  相談チャット
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <h2>{{ other_participant.username }}さん</h2>
+
+    <div id="chat-log">
+        {% for message in messages %}
+            <div class="message {% if message.sender == user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    <strong>{{ message.sender.username }}</strong><br>
+                    {{ message.text }} 
+                    <small>{{ message.timestamp }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="chat-message-input">
+        <input id="message" type="text">
+        <input id="send" type="button" value="↑">
+    </form>
+</div>
+
+<script>
+    const roomName = "{{ chat.id }}";
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        if (data.sender === "{{ user.username }}") {
+            messageElement.classList.add('sent');
+        } else {
+            messageElement.classList.add('received');
+        }
+        messageElement.innerHTML = `
+            <div class="message-content">
+                <strong>${data.sender}:</strong><br> ${data.message} 
+                <small>${data.timestamp}</small>
+            </div>`;
+        document.querySelector('#chat-log').appendChild(messageElement);
+        scrollToBottom();  // 新しいメッセージを追加した後にスクロール
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#send').onclick = function(e) {
+        const messageInputDom = document.querySelector('#message');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+        messageInputDom.value = '';
+    };
+
+    function scrollToLatestMessage() {
+        const latestMessage = document.querySelector('.message:last-child');
+        if (latestMessage) {
+            latestMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    // ページロード時にチャットフォームの位置にスクロール
+    window.onload = scrollToLatestMessage;
+</script>
+{% endblock %}

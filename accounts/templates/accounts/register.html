@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}新規登録{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="register-container">
+    <h2>新規登録</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">登録</button>
+    </form>
+    <a href="{% url 'login' %}">すでにアカウントをお持ちですか？ ログイン</a>
+</div>
+{% endblock %}

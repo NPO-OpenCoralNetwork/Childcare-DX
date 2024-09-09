@@ -1,0 +1,196 @@
+.inquiry-container {
+    background-color: #FFF6EC; /* ベースカラー */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    max-width: 800px;
+    margin: 0 auto; /* 中央揃え */
+    min-height: 400px; /* 返答がなくても最低限の高さを確保 */
+}
+
+h2 {
+    color: #4B4D37; /* テキストカラー */
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    padding-top: 20px;
+    
+}
+
+p {
+    color: #4B4D37; /* テキストカラー */
+    margin: 0 20px 80px 20px;
+    line-height: 1.6;
+    font-size: 2vb;
+    
+}
+
+.inquiry-meta {
+    font-style: italic;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+a {
+    text-align: center;
+    text-decoration: none;
+    color: #D2986A;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #D2986A;
+    color: #FFF6EC;
+}
+.responses-container {
+    margin-top: 30px;
+    background-color: #FFF6EC;
+    padding: 15px;
+
+}
+
+.responses-container h3 {
+    color: #4B4D37;
+    margin-bottom: 15px;
+}
+
+.responses-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.responses-list li {
+    padding: 10px;
+    border-bottom: 1px solid #D2986A;
+    margin-bottom: 10px;
+}
+
+.responses-list li a {
+    color: #D2986A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.responses-list li a:hover {
+    color: #B5784F;
+}
+
+.response-form {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 150px; /* フォームの高さを低く設定 */
+}
+
+.response-form p {
+    color: #4B4D37;
+    margin: 5px auto;
+}
+
+.response-form textarea {
+    height: 70px;
+    width: 70%;
+    border-radius: 10px; 
+    border-color: #D2986A;
+    font-size: large;
+    
+}
+
+.response-form button {
+    padding: 5px 15px;
+    background-color: #D2986A;
+    color: #FFF6EC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    
+}
+
+.response-form button:hover {
+    background-color: #B5784F;
+}
+
+
+.container-header {
+    display: flex;
+    justify-content: unsafe;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+
+button {
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* テキストカラー */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #B5784F;
+}
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .inquiry-container {
+        padding: 15px;
+    }
+
+    .responses-list li {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .response-form {
+        height: 120px;
+    }
+
+    .response-form textarea {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inquiry-container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .responses-list li {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    .response-form {
+        height: 100px;
+    }
+
+    .response-form textarea {
+        height: 40px;
+    }
+}

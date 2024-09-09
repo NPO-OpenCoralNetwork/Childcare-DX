@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  {{ inquiry.title }}
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/inquiry_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="inquiry-container">
+  <div class="container-header">
+    <div class="menu-container">
+        <button class="three-dots-button" onclick="toggleMenu()">⋮</button>
+        <div id="menu-content{{ inquiry.id }}" class="menu-content">
+    {% if is_owner %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="delete_inquiry" onclick="return confirm('本当に削除してよろしいですか？');">
+            投稿を削除
+        </button>
+    </form>
+    {% endif %}
+    
+        {% if user.is_authenticated and user.user_type == 'responder' and not is_owner%}
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="inquiry_id" value="{{ inquiry.id }}">
+            <button type="submit" name="save_inquiry">相談を保存</button>
+        </form>
+        <button class="report-button" onclick="openReportForm('{{ user.id }}')">通報</button>  
+    {% endif %}
+</div>
+</div>
+    <div class="image-container">
+    <img src="{{ inquiry.user.profile_image.url }}" alt="Profile Image">
+    <h3><a href="{% url 'profile' inquiry.user.pk %}">{{ inquiry.user.username }}さん</a>の相談</h3>
+    </div>
+</div>
+    <p>{{ inquiry.content }}</p>
+    
+    
+    {% if responses.exists %}
+
+    <div class="responses-container">
+        {% for response in responses.all %}
+        <div class="menu-container">
+            <button class="three-dots-button" onclick="toggleMenu2('{{ response.id }}')">⋮</button>
+            <div id="menu-content{{ response.id }}" class="menu-content">
+            
+            {% if response.user == user %}
+            <form method="post" class="delete-response-form">
+                {% csrf_token %}
+                <input type="hidden" name="delete_response_id" value="{{ response.id }}">
+                <button type="submit" name="delete_response" onclick="return confirm('本当に削除してよろしいですか？');">
+                    返答を削除
+                </button>
+            </form>
+            {% endif %} 
+            {% if user.user_type == 'inquirer' and response.user != user %}  
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="response_id" value="{{ response.id }}">
+                <button type="submit" name="save_response">回答を保存</button>
+            </form>
+            <button class="report-button" onclick="openReportForm('{{ user.id }}')">通報</button>
+            {% endif %}  
+        </div>
+        </div>
+            <div class="image-container">
+                
+            <img src="{{ response.user.profile_image.url }}" alt="">
+            <h3><a href="{% url 'profile' response.user.pk %}">{{ response.user.username }}さん</a>の返答</h3>  
+            </div>
+            <ul class="responses-list">
+            <li>{{ response.content }}</li>
+            </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if user.user_type == 'responder' %}
+        <div class="response-form">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">返答</button>
+            </form>
+        </div>
+    {% endif %}
+    <div id="reportForm" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeReportForm()">&times;</span>
+          <form method="POST" action="{% url 'report_user' %}">
+            {% csrf_token %}
+            <input type="hidden" name="reported_user_id" id="reported_user_id">
+            <label for="reason">通報理由:</label>
+            <textarea name="reason" required></textarea>
+            <button type="submit">送信</button>
+          </form>
+        </div>
+      </div>
+</div>
+
+<script>
+
+function toggleMenu() {
+    const menuContent = document.getElementById("menu-content{{ inquiry.id }}");
+    menuContent.classList.toggle("active");
+}
+function toggleMenu2(responseId) {
+    const menuContent = document.getElementById("menu-content" + responseId);
+    if (menuContent) {
+        menuContent.classList.toggle("active");
+    } else {
+        console.error("Menu content not found for response id: " + responseId);
+    }
+}
+
+function openReportForm(userId) {
+    document.getElementById("reported_user_id").value = userId;
+    document.getElementById("reportForm").style.display = "block";
+}
+
+function closeReportForm() {
+    document.getElementById("reportForm").style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.three-dots-button')) {
+        const menus = document.getElementsByClassName("menu-content");
+        for (let i = 0; i < menus.length; i++) {
+            if (menus[i].classList.contains('active')) {
+                menus[i].classList.remove('active');
+            }
+        }
+    }
+}
+</script>
+{% endblock %}

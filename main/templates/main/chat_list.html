@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block head %}<link rel="stylesheet" href="{% static 'css/chat_list.css' %}">{% endblock %}
+{% block title %}
+  相談チャットリスト
+{% endblock title %}
+{% block content %}
+<div class="chat-list-container">
+    <h2>チャット履歴</h2>
+
+    <ul class="chat-list">
+        {% for item in chat_data %}
+            <li class="chat-item">
+                <a href="{% url 'chat' item.chat.id %}" class="chat-link">
+                    {{ item.other_participant_username }}さんと話す
+                </a>
+            </li>
+        {% empty %}
+            <li class="no-chat">相談相手がいません</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.user_type == 'inquirer' %}
+        <form method="GET" action="{% url 'chat_list' %}" class="search-form">
+            <input type="text" name="q" placeholder="回答者ユーザーを検索..." class="search-input">
+            <button type="submit" class="search-button">検索</button>
+        </form>
+
+        {% if request.GET.q %}
+            {% if responders %}
+                <ul class="responder-list">
+                    {% for responder in responders %}
+                        <li class="responder-item">
+                            <a href="{% url 'profile' responder.id %}" class="responder-link">
+                                {{ responder.username }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-responder">該当する回答者がいません。</p>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

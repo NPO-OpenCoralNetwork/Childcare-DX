@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  相談リスト
+{% endblock title %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/inquiry_list.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="inquiry-list-container">
+    <h2>相談一覧</h2>
+
+    <!-- 統合された検索フォーム -->
+
+        <div class="tags-container">
+            {% for tag in tags %}
+                <label for="{{ tag.id }}" class="{% if tag.id|stringformat:"s" in selected_tags %}selected{% endif %}">
+                    {{ tag.name }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <!-- 選択されたタグIDを保持するhidden input -->
+        <div id="hidden-inputs"></div>
+        <form method="get" action="{% url 'inquiry_list' %}" class="search-form">
+            <input type="text" name="q" placeholder="検索ワード" value="{{ query }}" class="search-input">
+            <button type="submit" class="search-button">検索</button>
+    </form>
+
+    <!-- 検索結果表示 -->
+    {% if inquiries %}
+        <ul class="inquiry-list">
+            {% for inquiry in inquiries %}
+                <li class="inquiry-item">
+                    <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a>
+                    <span>{{ inquiry.created_at }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- ページネーション -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?{% if query %}q={{ query }}&{% endif %}
+                              {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
+                              page=1">&laquo; 最初</a>
+                    <a href="?{% if query %}q={{ query }}&{% endif %}
+                              {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
+                              page={{ page_obj.previous_page_number }}">&lsaquo; 前</a>
+                {% endif %}
+
+                <span class="current">
+                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?{% if query %}q={{ query }}&{% endif %}
+                              {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
+                              page={{ page_obj.next_page_number }}">次 &rsaquo;</a>
+                    <a href="?{% if query %}q={{ query }}&{% endif %}
+                              {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
+                              page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <p class="no-inquiry">該当する相談がありません。</p>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tags = document.querySelectorAll('.tags-container label');
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateHiddenInput();
+            });
+        });
+
+        function updateHiddenInput() {
+            const selectedTags = [];
+            document.querySelectorAll('.tags-container label.selected').forEach(tag => {
+                selectedTags.push(tag.getAttribute('for'));
+            });
+
+            const hiddenInputContainer = document.getElementById('hidden-inputs');
+            hiddenInputContainer.innerHTML = '';
+
+            selectedTags.forEach(tagId => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'tags';
+                input.value = tagId;
+                hiddenInputContainer.appendChild(input);
+            });
+        }
+
+        // 初期ロード時に既存の選択タグをhidden inputに追加
+        updateHiddenInput();
+    });
+</script>
+{% endblock %}

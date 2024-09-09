@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/announcement_detail.css' %}">
+{% block title %}
+  お知らせ
+{% endblock title %}
+{% endblock %}
+
+{% block content %}
+<div class="announcement-detail-container">
+    <h1 class="announcement-title">{{ announcement.title }}</h1>
+    <p class="announcement-date">{{ announcement.date }}</p>
+    <div class="announcement-content">
+        {{ announcement.content|linebreaksbr }}
+    </div>
+</div>
+{% endblock %}

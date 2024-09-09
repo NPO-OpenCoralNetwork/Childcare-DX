@@ -1,0 +1,79 @@
+.auth-container {
+    background-color: #FFF6EC; /* ベースカラー */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    max-width: 600px;
+    margin: 20px auto; /* 中央揃え */
+    text-align: center;
+}
+
+.auth-container h2 {
+    color: #4B4D37; /* テキストカラー */
+    margin-bottom: 20px;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container form input,
+.auth-container form button {
+    padding: 10px;
+    border: 1px solid #D2986A; /* アクセントカラー */
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    width: 100%;
+    outline: none;
+}
+
+.auth-container form button {
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.auth-container form button:hover {
+    background-color: #B5784F; /* アクセントカラーを少し暗く */
+}
+
+.auth-container a {
+    color: #D2986A;
+    text-decoration: none;
+}
+
+.auth-container a:hover {
+    color: #B5784F;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1040px) {
+    .auth-container {
+        padding: 15px;
+        margin-top: 150px;
+    }
+
+    .auth-container form input,
+    .auth-container form button {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 10px;
+    }
+
+    .auth-container h2 {
+        font-size: 1.5em;
+    }
+
+    .auth-container form input,
+    .auth-container form button {
+        font-size: 0.8em;
+    }
+}

@@ -1,0 +1,167 @@
+
+
+main {
+    height: 90%;
+}
+.chat-container {
+    background-color: #FFF6EC; /* ベースカラー */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    max-width: 90%;
+    max-height:  90%;
+    margin: 50px auto; /* 中央揃え */
+}
+
+h2 {
+    color: #4B4D37; /* テキストカラー */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#chat-log {
+    height: 500px;
+    overflow-y: auto; /* スクロール機能を維持 */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #D2986A; /* アクセントカラー */
+    border-radius: 8px;
+    background-color: #F9F9F9;
+}
+
+/* スクロールバーを非表示にする */
+#chat-log::-webkit-scrollbar {
+    display: none;
+}
+
+#chat-log {
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message-content {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    position: relative;
+    
+}
+
+.message.sent .message-content {
+    background-color: #B5784F; /* 送信者用の色 */
+}
+
+.message-content::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+}
+
+.message.sent .message-content::after {
+    right: -20px;
+    border-left-color: #B5784F; /* 送信者用の色 */
+    border-right: none;
+}
+
+.message.received .message-content::after {
+    left: -20px;
+    border-right-color: #D2986A; /* アクセントカラー */
+    border-left: none;
+}
+
+.message small {
+    display: block;
+    text-align: right;
+    color: #FFF6EC; /* ベースカラー */
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+#chat-message-input {
+    display: flex;
+    margin-top: 20px;
+    
+}
+
+#message {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #D2986A; /* アクセントカラー */
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+#send {
+    padding: 10px 20px;
+    background-color: #D2986A; /* アクセントカラー */
+    color: #FFF6EC; /* ベースカラー */
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#send:hover {
+    background-color: #B5784F; /* アクセントカラーを少し暗く */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1040px) {
+    .chat-container {
+        padding: 15px;
+        height: 800px;
+        margin-top: 80px;
+    }
+    #chat-log {
+        height: 650px;
+    }
+    #message {
+        font-size: 0.9em;
+    }
+
+    #send {
+        font-size: 0.9em;
+    }
+
+    .message-content {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .message-content {
+        font-size: 0.8em;
+        padding: 6px;
+    }
+
+    #chat-log {
+        max-height: 300px;
+    }
+}

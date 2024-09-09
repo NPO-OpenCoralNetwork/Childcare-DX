@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  保存した相談
+{% endblock title %}
+{% block head %}
+<title>保存した相談</title>
+<link rel="stylesheet" href="{% static 'css/saved_response.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="saved-response-container">
+<h2>保存した相談</h2>
+<ul>
+    {% for saved_inquiry in saved_inquiries %}
+        <li>
+            <a href="{% url 'inquiry_detail' saved_inquiry.inquiry.id %}">
+                {{ saved_inquiry.inquiry.title }}
+            </a>
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="inquiry_id" value="{{ saved_inquiry.inquiry.id }}">
+                <button type="submit" class="delete-button">削除</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
