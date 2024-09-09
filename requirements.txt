@@ -19,7 +19,6 @@ idna==3.7
 incremental==24.7.2
 phonenumbers==8.13.43
 pillow==10.4.0
-psycopg2==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
@@ -40,3 +39,6 @@ txaio==23.1.1
 typing_extensions==4.12.2
 tzdata==2024.1
 zope.interface==7.0.1
+whitenoise
+django-heroku
+psycopg2-binary
