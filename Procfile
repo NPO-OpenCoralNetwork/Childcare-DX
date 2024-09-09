@@ -1,1 +1,2 @@
-web: daphne carehelper.asgi:application --port $PORT
+web: daphne -b 0.0.0.0 -p $PORT <project_name>.asgi:application
+
