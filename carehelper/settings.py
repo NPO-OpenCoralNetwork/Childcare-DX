@@ -31,10 +31,12 @@ ALLOWED_HOSTS = [ 'forcarer-361965a317c9.herokuapp.com','www.forcarer.org','loca
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # # または、特定のオリジンだけを許可する場合
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://127.0.0.1:8000',
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://forcarer-361965a317c9.herokuapp.com',
+    'https://www.forcarer.org'
+]
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
 INSTALLED_APPS = [
