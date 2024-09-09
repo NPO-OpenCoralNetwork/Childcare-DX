@@ -1,1 +1,0 @@
-web: daphne carehelper.asgi:application --port $PORT --log-file -
