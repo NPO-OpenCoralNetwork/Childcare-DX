@@ -135,7 +135,7 @@ def profile_view(request, pk):
                    profile_image = form.cleaned_data.get('profile_image')
                    if profile_image != None:
                       user_profile.profile_image = profile_image
-                      user_profile.save()
+                      
                    form.save()
                 return redirect('profile', pk=user_profile.pk)
 
