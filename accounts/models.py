@@ -18,19 +18,18 @@ class UserProfile(AbstractUser):
     response_history = models.TextField(blank=True, null=True)
     chat_history = models.TextField(blank=True, null=True) 
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
-    inquiry_default_image = models.ImageField(upload_to='default_images/', default='default_image/icon_sheep.png', null=True, blank=True)
-    responser_default_image = models.ImageField(upload_to='default_images/', default='default_image/icon_cap.png',null=True, blank=True)
+    
     def save(self, *args, **kwargs):
         # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
         if self.pk:
             previous = UserProfile.objects.get(pk=self.pk)
-            default_image = (self.inquiry_default_image,self.responser_default_image)
+            print(self.profile_image)
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
-            if (not self.profile_image or default_image in str(self.profile_image)):
+            if (not self.profile_image or 'default_images' in str(self.profile_image)):
                 if self.user_type == 'inquirer':
-                    self.profile_image = self.inquiry_default_image
+                    self.profile_image = 'default_images/icon_sheep.png'
                 elif self.user_type == 'responder':
-                    self.profile_image = self.responser_default_image
+                    self.profile_image = 'default_images/icon_kap.png'
         
         super().save(*args, **kwargs)
     
