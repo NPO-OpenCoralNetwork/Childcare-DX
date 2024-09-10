@@ -11,7 +11,7 @@
 <div class="profile-container">
   <h2>{{ user_profile.username }}さんのプロフィール</h2>
     <div class="profile-image">
-        <img src="{{ user_profile_instance.profile_image.url }}" alt="Profile Image">
+        <img src="{{ user_profile.profile_image.url }}" alt="Profile Image">
     </div>
   {% if is_owner %}
   <form method="post" enctype="multipart/form-data">
