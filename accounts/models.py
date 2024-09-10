@@ -29,7 +29,7 @@ class UserProfile(AbstractUser):
                 if self.user_type == 'inquirer':
                     self.profile_image = 'https://asset.cloudinary.com/duriorm1m/c817d72dcda07f3d5f5ab7dffdb19aae'
                 elif self.user_type == 'responder':
-                    self.profile_image = 'https://res.cloudinary.com/duriorm1m/image/upload/v1725934048/icon_kap_aptfdl.png'
+                    self.profile_image = 'v1725934048/icon_kap_aptfdl.png'
         
         super().save(*args, **kwargs)
     
