@@ -75,7 +75,7 @@ def send_otp_via_email(request,user):
     print(request.session['otp_user_id'])
     subject = 'ワンタイムパスワード (OTP)'
     message = f'{user.username}様,\n\nログイン用のワンタイムパスワードは {otp_code} です。このパスワードは10分間有効です。\n\nよろしくお願いします。'
-    from_email = 'no-reply@yourdomain.com'
+    from_email = 'no-reply@www.forcarer.org'
     recipient_list = [user.email]
 
     send_mail(subject, message, from_email, recipient_list)

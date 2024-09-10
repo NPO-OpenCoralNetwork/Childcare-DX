@@ -42,3 +42,6 @@ zope.interface==7.0.1
 django-heroku
 psycopg2-binary
 whitenoise
+cloudinary 
+django-cloudinary-storage
+
