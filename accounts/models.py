@@ -17,7 +17,7 @@ class UserProfile(AbstractUser):
     inquiry_history = models.TextField(blank=True, null=True) 
     response_history = models.TextField(blank=True, null=True)
     chat_history = models.TextField(blank=True, null=True) 
-    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    profile_image = models.ImageField(null=True, blank=True)
     
     def save(self, *args, **kwargs):
         # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
@@ -27,7 +27,7 @@ class UserProfile(AbstractUser):
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
             if (not self.profile_image or ('sheep' or 'kap' in str(self.profile_image))):
                 if self.user_type == 'inquirer':
-                    self.profile_image = 'https://asset.cloudinary.com/duriorm1m/c817d72dcda07f3d5f5ab7dffdb19aae'
+                    self.profile_image = 'icon_sheep_g1dsw0.png'
                 elif self.user_type == 'responder':
                     self.profile_image = 'v1725934048/icon_kap_aptfdl.png'
         
