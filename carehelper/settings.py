@@ -85,7 +85,7 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='bacondoor1313@gmail.com'
 EMAIL_HOST_PASSWORD='krfu zzzk mclg nviz'
-
+DEFAULT_FROM_EMAIL = 'no-reply@forcarer.org'
 ROOT_URLCONF = 'carehelper.urls'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
