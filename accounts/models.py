@@ -28,9 +28,9 @@ class UserProfile(AbstractUser):
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
             if (not self.profile_image or default_image in str(self.profile_image)):
                 if self.user_type == 'inquirer':
-                    self.profile_image = 'default_images/icon_sheep.png'
+                    self.profile_image = self.inquiry_default_image
                 elif self.user_type == 'responder':
-                    self.profile_image = 'default_images/icon_kap.png'
+                    self.profile_image = self.responser_default_image
         
         super().save(*args, **kwargs)
     
