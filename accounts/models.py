@@ -27,9 +27,9 @@ class UserProfile(AbstractUser):
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
             if previous.user_type != self.user_type and (not self.profile_image or 'sheep' in str(self.profile_image) or 'kap' in str(self.profile_image)):
                 if self.user_type == 'inquirer':
-                    self.profile_image = 'icon_sheep_g1dsw0.png'
+                    self.profile_image = 'image/upload/icon_sheep_g1dsw0.png'
                 elif self.user_type == 'responder':
-                    self.profile_image = 'v1725934048/icon_kap_aptfdl.png'
+                    self.profile_image = 'image/upload/v1725934048/icon_kap_aptfdl.png'
         
         super().save(*args, **kwargs)
     
