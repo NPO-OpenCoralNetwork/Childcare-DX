@@ -27,7 +27,7 @@ class UserProfile(AbstractUser):
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
             if (not self.profile_image or 'default_images' in str(self.profile_image)):
                 if self.user_type == 'inquirer':
-                    self.profile_image = 'https://res.cloudinary.com/duriorm1m/image/upload/v1725934142/icon_sheep_g1dsw0.png'
+                    self.profile_image = 'https://asset.cloudinary.com/duriorm1m/c817d72dcda07f3d5f5ab7dffdb19aae'
                 elif self.user_type == 'responder':
                     self.profile_image = 'https://res.cloudinary.com/duriorm1m/image/upload/v1725934048/icon_kap_aptfdl.png'
         
