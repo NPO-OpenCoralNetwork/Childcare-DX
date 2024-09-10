@@ -210,7 +210,7 @@ CLOUDINARY_STORAGE = {
 }
 
 # Cloudinaryをデフォルトのメディアストレージに設定
-MEDIA_URL = '/media/'
+MEDIA_URL = f'https://res.cloudinary.com/{os.getenv("CLOUDINARY_CLOUD_NAME")}/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
