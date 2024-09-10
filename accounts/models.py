@@ -17,7 +17,7 @@ class UserProfile(AbstractUser):
     inquiry_history = models.TextField(blank=True, null=True) 
     response_history = models.TextField(blank=True, null=True)
     chat_history = models.TextField(blank=True, null=True) 
-    profile_image = models.ImageField(null=True, blank=True)
+    profile_image = models.ImageField(upload_to='image/upload',null=True, blank=True)
     
     def save(self, *args, **kwargs):
         # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
