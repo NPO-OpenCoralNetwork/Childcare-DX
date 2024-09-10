@@ -25,7 +25,7 @@ class UserProfile(AbstractUser):
             previous = UserProfile.objects.get(pk=self.pk)
             print(self.profile_image)
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
-            if (not self.profile_image or 'default_images' in str(self.profile_image)):
+            if (not self.profile_image or ('sheep' or 'kap' in str(self.profile_image))):
                 if self.user_type == 'inquirer':
                     self.profile_image = 'https://asset.cloudinary.com/duriorm1m/c817d72dcda07f3d5f5ab7dffdb19aae'
                 elif self.user_type == 'responder':
