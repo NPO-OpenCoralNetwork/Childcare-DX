@@ -19,19 +19,18 @@ class UserProfile(AbstractUser):
     chat_history = models.TextField(blank=True, null=True) 
     profile_image = models.ImageField(upload_to='image/upload',null=True, blank=True)
     
-    # def save(self, *args, **kwargs):
-    #     # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
-    #     if self.pk:
-    #         previous = UserProfile.objects.get(pk=self.pk)
-    #         print(self.profile_image)
-    #         # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
-    #         if previous.user_type != self.user_type and (not self.profile_image or 'sheep' in str(self.profile_image) or 'kap' in str(self.profile_image)):
-    #             if self.user_type == 'inquirer':
-    #                 self.profile_image = 'image/upload/icon_sheep_g1dsw0.png'
-    #             elif self.user_type == 'responder':
-    #                 self.profile_image = 'image/upload/v1725934048/icon_kap_aptfdl.png'
-        
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
+        if self.pk:
+            previous = UserProfile.objects.get(pk=self.pk)
+            print(self.profile_image)
+            # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
+            if previous.user_type != self.user_type and (not self.profile_image or 'sheep' in str(self.profile_image) or 'kap' in str(self.profile_image)):
+                if self.user_type == 'inquirer':
+                    self.profile_image = 'image/upload/icon_sheep_j5mycm.png'
+                elif self.user_type == 'responder':
+                    self.profile_image = 'image/upload/icon_kap_vhgmdz.png'
+        super().save(*args, **kwargs)
     
 
     groups = models.ManyToManyField(
