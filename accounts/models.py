@@ -25,7 +25,7 @@ class UserProfile(AbstractUser):
             previous = UserProfile.objects.get(pk=self.pk)
             print(self.profile_image)
             # ユーザータイプが変更され、かつオリジナルの画像が設定されていない場合のみデフォルト画像を更新
-            if (not self.profile_image or ('sheep' or 'kap' in str(self.profile_image))):
+            if previous.user_type != self.user_type and (not self.profile_image or ('sheep' or 'kap' in str(self.profile_image))):
                 if self.user_type == 'inquirer':
                     self.profile_image = 'icon_sheep_g1dsw0.png'
                 elif self.user_type == 'responder':
