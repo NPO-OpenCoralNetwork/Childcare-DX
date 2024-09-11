@@ -83,8 +83,8 @@ MIDDLEWARE = [
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER='bacondoor1313@gmail.com'
-EMAIL_HOST_PASSWORD='krfu zzzk mclg nviz'
+EMAIL_HOST_USER='www.forcarer@gmail.com'
+EMAIL_HOST_PASSWORD='tqyb ekdo hgnf sfyy'
 DEFAULT_FROM_EMAIL = 'no-reply@forcarer.org'
 ROOT_URLCONF = 'carehelper.urls'
 
