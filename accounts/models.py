@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 import datetime
+import carehelper.settings
 from cloudinary.models import CloudinaryField
 
 class UserProfile(AbstractUser):
@@ -16,8 +17,11 @@ class UserProfile(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     inquiry_history = models.TextField(blank=True, null=True) 
     response_history = models.TextField(blank=True, null=True)
-    chat_history = models.TextField(blank=True, null=True) 
-    profile_image = CloudinaryField('image',default='default_image/icon_cap.jpg')
+    chat_history = models.TextField(blank=True, null=True)
+    if not carehelper.settings.DEBUG:
+        profile_image = CloudinaryField('image',default='default_images/icon_cap.jpg')
+    else:
+        profile_image = models.ImageField(default='default_images/icon_cap.jpg')
     
     def save(self, *args, **kwargs):
         # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認
