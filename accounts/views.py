@@ -101,7 +101,8 @@ def verify_otp_view(request):
 
             if otp_entry.is_valid():
                 otp_entry.delete()
-                user.is_active = True  # ユーザーをアクティブに設定
+                user.is_active = True
+                user.save()  # ユーザーをアクティブに設定
                 print(user)
                 login(request, user)  # ユーザーをログインさせる
                 messages.success(request, 'ログインに成功しました。')

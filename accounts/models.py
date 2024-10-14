@@ -17,7 +17,7 @@ class UserProfile(AbstractUser):
     inquiry_history = models.TextField(blank=True, null=True) 
     response_history = models.TextField(blank=True, null=True)
     chat_history = models.TextField(blank=True, null=True) 
-    profile_image = CloudinaryField('image')
+    profile_image = CloudinaryField('image',default='default_image/icon_cap.jpg')
     
     def save(self, *args, **kwargs):
         # 以前のインスタンスを取得して、ユーザータイプが変更されたか確認

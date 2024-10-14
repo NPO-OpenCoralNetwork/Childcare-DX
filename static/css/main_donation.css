@@ -1,0 +1,45 @@
+.home-container {
+    text-align: center;
+    
+}
+
+.donation-type-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+}
+
+.donation-type {
+    width: 48%;
+    background-color: #FFF6EC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.donation-type h3 {
+    color: #4B4D37;
+    text-align: center;
+}
+
+.donation-type p {
+    text-align: center;
+    color: #4B4D37;
+}
+
+.donation-type a {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #D2986A;
+    color: #FFF6EC;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.donation-type a:hover {
+    background-color: #B5784F;
+}

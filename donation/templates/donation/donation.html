@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}
+寄付について
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/main_donation.css' %}" />
+{% endblock %} 
+{% block content %}
+<div class="home-container">
+    <h2>寄付のご案内</h2>
+    <p>当プロジェクトでは、以下の2種類の寄付をご用意しています。</p>
+
+    <div class="donation-type-container">
+        <div class="donation-type">
+            <h3>一般寄付</h3>
+            <p>一回限りの寄付で、金額は100円以上から自由に設定できます。<br>
+            皆様のご支援が、このプロジェクトの継続を支えます。</p>
+            <a href="{% url 'general_donation' %}" class="btn btn-primary">一般寄付ページへ</a>
+        </div>
+
+        <div class="donation-type">
+            <h3>会員寄付</h3>
+            <p>月払いまたは年払いを選択できる定額寄付です。<br>
+            長期的にプロジェクトを支援していただける方におすすめです。</p>
+            <a href="{% url 'membership_donation' %}" class="btn btn-primary">会員寄付ページへ</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -44,4 +44,5 @@ psycopg2-binary
 whitenoise
 cloudinary 
 django-cloudinary-storage
+stripe
 

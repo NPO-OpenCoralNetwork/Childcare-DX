@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}
+会員寄付ページ
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/donation.css' %}" />
+{% endblock %} 
+{% block content %}
+<h1>ただいま寄付画面は制作・テスト中です。実際の寄付はまだ行えません</h1>
+<div class="home-container">
+    <h2>会員寄付</h2>
+    <p>月払いまたは年払いを選択して、継続的な支援をお願いしています。</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">寄付する</button>
+    </form>
+</div>
+{% endblock %}
+

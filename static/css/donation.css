@@ -1,0 +1,40 @@
+.home-container {
+    width: 60%;
+    background-color: #FFF6EC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+}
+
+h2 {
+    color: #4B4D37;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #4B4D37;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #D2986A;
+    color: #FFF6EC;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #B5784F;
+}

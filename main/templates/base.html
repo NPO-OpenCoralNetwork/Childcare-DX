@@ -24,6 +24,7 @@
                     <li><a href="{% url 'search_sjigyousha' %}">障碍者介護事業所検索</a></li>
                     <li><a href="https://www.ncasa-japan.jp/you-do/treatment/treatment-map/">依存症専門事業所検索</a></li>
                     <li><a href="{% url 'inquiry_list' %}">相談一覧</a></li>
+                    <li><a href="{% url 'donation_overview' %}">寄付のご案内</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'profile' user.pk %}">マイプロフィール</a></li>
                     <li><a href="{% url 'chat_list' %}">チャット</a></li>

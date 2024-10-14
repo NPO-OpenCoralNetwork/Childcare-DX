@@ -26,8 +26,8 @@ urlpatterns = [
     path('inquiries/', include('inquiries.urls')),
     path('chat/', include('chat.urls')),
     path('jigyousha/', include('jigyousha.urls')),
+    path('donation/',include('donation.urls')),
     path('api/', include('api.urls')),
-
 ] 
 
 if settings.DEBUG:
