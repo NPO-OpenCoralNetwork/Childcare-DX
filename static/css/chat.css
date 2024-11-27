@@ -14,7 +14,7 @@ main {
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -24,7 +24,7 @@ h2 {
     overflow-y: auto; /* スクロール機能を維持 */
     margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     border-radius: 8px;
     background-color: #F9F9F9;
 }
@@ -55,14 +55,14 @@ h2 {
     max-width: 60%;
     padding: 10px;
     border-radius: 8px;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     position: relative;
     
 }
 
 .message.sent .message-content {
-    background-color: #B5784F; /* 送信者用の色 */
+    background-color: #d2e479; /* 送信者用の色 */
 }
 
 .message-content::after {
@@ -76,13 +76,13 @@ h2 {
 
 .message.sent .message-content::after {
     right: -20px;
-    border-left-color: #B5784F; /* 送信者用の色 */
+    border-left-color: #d2e479; /* 送信者用の色 */
     border-right: none;
 }
 
 .message.received .message-content::after {
     left: -20px;
-    border-right-color: #D2986A; /* アクセントカラー */
+    border-right-color: #d2e479; /* アクセントカラー */
     border-left: none;
 }
 
@@ -103,14 +103,14 @@ h2 {
 #message {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     border-radius: 5px 0 0 5px;
     outline: none;
 }
 
 #send {
     padding: 10px 20px;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     border: none;
     border-radius: 0 5px 5px 0;
@@ -120,7 +120,7 @@ h2 {
 }
 
 #send:hover {
-    background-color: #B5784F; /* アクセントカラーを少し暗く */
+    background-color: #d2e479; /* アクセントカラーを少し暗く */
 }
 
 /* レスポンシブ対応 */

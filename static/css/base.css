@@ -1,15 +1,16 @@
 body {
-    font-family: 'Times New Roman', serif;
+    font-family: "Sawarabi Mincho", serif;
+
     background-color: #FFF6EC;
     /* ベースカラー */
     margin: 0 auto;
     padding: 0;
-    color: #4B4D37;
+    color: #797a94;
     /* テキストカラー */
 }
 
 header {
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
     padding: 20px;
     text-align: center;
@@ -33,7 +34,7 @@ nav ul {
     display: flex;
     justify-content: center;
     background-color: #FFF6EC;
-    border-top: 5px solid #D2986A;
+    border-top: 5px solid #d2e479;
     border-radius: 8px;
 
 }
@@ -41,7 +42,7 @@ nav ul {
 nav ul li {
     margin: 0;
     padding: 10px;
-    border-left: 5px solid #D2986A;
+    border-left: 5px solid #d2e479;
    
 }
 
@@ -52,7 +53,7 @@ nav ul li:first-child {
 
 nav ul li a {
     text-decoration: none;
-    color: #4B4D37;
+    color: #797a94;
     /* テキストカラー */
     font-weight: bold;
     border-radius: 5px;
@@ -64,11 +65,12 @@ nav ul li a {
 nav ul li a:hover {
     color: #FFF6EC;
     /* ホバー時のテキストカラー */
-    background-color: #D2986A;
+    background-color: #d2e479;
     /* ホバー時の背景カラー */
 }
 
 .wrapper {
+    
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -79,26 +81,27 @@ main {
     flex-grow: 1;
     padding: 20px;
     background-color: #FFF6EC;
-    /* ベースカラー */
     border-radius: 8px;
-    /* 丸みを追加 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 影を追加して浮き上がらせる */
+    z-index: 3;
 }
-
+.bgimg {
+    position: static;
+    z-index: 1;
+}
 .navbar-toggler {
     display: none;
 }
 
 footer {
 
-    background-color: #D2986A;
+    background-color: #d2e479;
     /* アクセントカラー */
     color: #FFF6EC;
     /* ベースカラー */
     text-align: center;
     padding: 10px;
-    border-top: 5px solid #4B4D37;
+    border-top: 5px solid #797a94;
     /* テキストカラー */
     border-radius: 8px;
     /* 丸みを追加 */
@@ -130,7 +133,7 @@ footer {
 
     nav ul li {
         border-left: none;
-        border-top: 2px solid #D2986A;
+        border-top: 2px solid #d2e479;
         width: 100%;
         text-align: center;
         padding: 10px 0;
@@ -141,7 +144,7 @@ footer {
         position: absolute;
         top: 20px;
         right: 20px;
-        background-color: #D2986A;
+        background-color: #d2e479;
         color: #FFF6EC;
         border: none;
         padding: 10px;
@@ -159,7 +162,7 @@ footer {
         right: -250px;
         width: 250px;
         height: 100%;
-        background-color: #D2986A;
+        background-color: #d2e479;
         padding-top: 60px;
         transition: right 0.3s ease;
         z-index: 999;
@@ -169,7 +172,7 @@ footer {
     }
 
     #sidebarMenu ul {
-       background-color: #D2986A;
+       background-color: #d2e479;
        border-top: #f5e4d1;
        border-bottom: #f5e4d1;
        padding: 0;
@@ -237,7 +240,7 @@ footer {
 
     nav ul li {
         border-left: none;
-        border-top: 3px solid #D2986A;
+        border-top: 3px solid #d2e479;
         width: 100%;
         text-align: center;
         padding: 10px 0;
@@ -248,7 +251,7 @@ footer {
         position: absolute;
         top: 20px;
         right: 20px;
-        background-color: #D2986A;
+        background-color: #d2e479;
         color: #FFF6EC;
         border: none;
         padding: 10px;
@@ -266,7 +269,7 @@ footer {
         right: -250px;
         width: 250px;
         height: 100%;
-        background-color: #D2986A;
+        background-color: #d2e479;
         padding-top: 60px;
         transition: right 0.3s ease;
         z-index: 999;
@@ -276,7 +279,7 @@ footer {
     }
 
     #sidebarMenu ul {
-       background-color: #D2986A;
+       background-color: #d2e479;
        border-top: #f5e4d1;
        border-bottom: #f5e4d1;
        padding: 0;

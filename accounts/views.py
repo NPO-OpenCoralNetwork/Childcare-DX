@@ -3,13 +3,12 @@ from django.contrib.auth import login, logout
 from django.core.mail import send_mail
 from .forms import CustomUserCreationForm, OTPForm,CustomAuthenticationForm,UserProfileForm
 from .models import UserProfile,OTP
-from carehelper.settings import SESSION_COOKIE_AGE
+from childhelper.settings import SESSION_COOKIE_AGE
 from django.contrib.auth.decorators import login_required
 from chat.models import Chat
 from inquiries.models import Inquiry,Response
 from django.contrib import messages
 import pyotp
-
 
 
 def login_view(request):

@@ -8,21 +8,21 @@
 }
 
 .announcement-title {
-    color: #4B4D37;
+    color: #797a94;
     font-size: 2em;
     margin-bottom: 10px;
     text-align: center;
 }
 
 .announcement-date {
-    color: #D2986A;
+    color: #d2e479;
     font-size: 0.9em;
     margin-bottom: 20px;
     text-align: center;
 }
 
 .announcement-content {
-    color: #4B4D37;
+    color: #797a94;
     font-size: 1.1em;
     line-height: 1.6em;
     white-space: pre-wrap; /* 改行を保持 */

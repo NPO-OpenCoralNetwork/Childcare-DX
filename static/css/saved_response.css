@@ -36,7 +36,7 @@
 .saved-response-container a {
     text-align: center;
     text-decoration: none;
-    color: #D2986A;
+    color: #d2e479;
     font-weight: bold;
     padding: 8px;
     border-radius: 5px;
@@ -44,13 +44,13 @@
 }
 
 .saved-response-container a:hover {
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
 }
 
 .delete-button {
     margin-left: 10px;
-    background-color: #D2986A; /* `base.css`に合わせた削除ボタンの色 */
+    background-color: #d2e479; /* `base.css`に合わせた削除ボタンの色 */
     color: white;
     border: none;
     padding: 5px 10px;

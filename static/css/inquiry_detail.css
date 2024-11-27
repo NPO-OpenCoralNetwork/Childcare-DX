@@ -9,7 +9,7 @@
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     
     text-align: center;
     
@@ -23,7 +23,7 @@ h3 {
 }
 
 p {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     margin: 0 20px 80px 20px;
     line-height: 1.6;
     font-size: 2vb;
@@ -64,7 +64,7 @@ img {
 a {
     text-align: center;
     text-decoration: none;
-    color: #D2986A;
+    color: #d2e479;
     font-weight: bold;
     padding: 8px;
     border-radius: 5px;
@@ -72,7 +72,7 @@ a {
 }
 
 a:hover {
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
 }
 .responses-container {
@@ -83,7 +83,7 @@ a:hover {
 }
 
 .responses-container h3 {
-    color: #4B4D37;
+    color: #797a94;
     margin-bottom: 15px;
 }
 
@@ -97,18 +97,18 @@ a:hover {
 
 .responses-list li {
     padding: 10px;
-    border-bottom: 1px solid #D2986A;
+    border-bottom: 1px solid #d2e479;
     margin-bottom: 10px;
 }
 
 .responses-list li a {
-    color: #D2986A;
+    color: #d2e479;
     text-decoration: none;
     font-weight: bold;
 }
 
 .responses-list li a:hover {
-    color: #B5784F;
+    color: #d2e479;
 }
 
 .response-form {
@@ -122,7 +122,7 @@ a:hover {
 }
 
 .response-form p {
-    color: #4B4D37;
+    color: #797a94;
     margin: 5px auto;
 }
 
@@ -130,14 +130,14 @@ a:hover {
     height: 70px;
     width: 70%;
     border-radius: 10px; 
-    border-color: #D2986A;
+    border-color: #d2e479;
     font-size: large;
     
 }
 
 .response-form button {
     padding: 5px 15px;
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
     border: none;
     border-radius: 5px;
@@ -148,7 +148,7 @@ a:hover {
 }
 
 .response-form button:hover {
-    background-color: #B5784F;
+    background-color: #d2e479;
 }
 
 
@@ -162,7 +162,7 @@ a:hover {
 
 
 button {
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* テキストカラー */
     border: none;
     border-radius: 5px;
@@ -174,11 +174,11 @@ button {
 }
 
 button:hover {
-    background-color: #B5784F;
+    background-color: #d2e479;
 }
 
 .three-dots-button {
-    background-color: #B5784F;
+    background-color: #d2e479;
     width: 30px;
     height: 40px;
     border: none;

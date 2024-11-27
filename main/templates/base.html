@@ -5,9 +5,12 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ケアラーのなやみ{% endblock %}</title>
+    <title>{% block title %}育児のなやみ{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+Rounded+1c&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     {% block head %}{% endblock %}
 </head>
@@ -15,14 +18,12 @@
 <body>
     <div class="wrapper">
         <header>
-            <h1>ケアラーのなやみ</h1>
+            <h1>育児のなやみ</h1>
             <button class="navbar-toggler" id="navbarToggle">&#9776;</button>
             <nav id="sidebarMenu">
                 <ul>
                     <li><a href="{% url 'home' %}">ホーム</a></li>
-                    <li><a href="{% url 'search_jigyousha' %}">高齢者介護事業所検索</a></li>
-                    <li><a href="{% url 'search_sjigyousha' %}">障碍者介護事業所検索</a></li>
-                    <li><a href="https://www.ncasa-japan.jp/you-do/treatment/treatment-map/">依存症専門事業所検索</a></li>
+                    <li><a href="{% url 'search_jigyousha' %}">保育施設検索</a></li>
                     <li><a href="{% url 'inquiry_list' %}">相談一覧</a></li>
                     <li><a href="{% url 'donation_overview' %}">寄付のご案内</a></li>
                     {% if user.is_authenticated %}
@@ -43,12 +44,12 @@
                 </ul>
             </nav>
         </header>
-        <main>
+        <main style="background-image: url('{{ MEDIA_URL }}bagimg/backimg.png');">
             {% block content %}
             {% endblock %}
         </main>
         <footer>
-            © 2024 かいごのなやみ
+            © 2024 育児のなやみ
         </footer>
 
 </body>

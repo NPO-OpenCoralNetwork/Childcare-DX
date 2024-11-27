@@ -8,7 +8,7 @@
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -22,18 +22,18 @@ h2 {
 
 .inquiry-item {
     padding: 10px;
-    border-bottom: 1px solid #D2986A; /* アクセントカラー */
+    border-bottom: 1px solid #d2e479; /* アクセントカラー */
 }
 
 .inquiry-item a {
-    color: #D2986A; /* アクセントカラー */
+    color: #d2e479; /* アクセントカラー */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .inquiry-item a:hover {
-    color: #B5784F; /* アクセントカラーを少し暗く */
+    color: #d2e479; /* アクセントカラーを少し暗く */
 }
 
 .search-form {
@@ -45,7 +45,7 @@ h2 {
 .search-input {
     width: 40%;
     padding: 10px;
-    border: 1px solid #D2986A;
+    border: 1px solid #d2e479;
     border-radius: 5px 0 0 5px;
     outline: none;
     flex-grow: 1;
@@ -54,7 +54,7 @@ h2 {
 
 .search-button {
     padding: 10px 20px;
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -64,12 +64,12 @@ h2 {
 }
 
 .search-button:hover {
-    background-color: #B5784F; /* アクセントカラーを少し暗く */
+    background-color: #d2e479; /* アクセントカラーを少し暗く */
 }
 
 .no-inquiry {
     text-align: center;
-    color: #4B4D37;
+    color: #797a94;
 }
 .tags-container {
     display: flex;
@@ -82,7 +82,7 @@ h2 {
 .tags-container label {
     display: inline-block;
     background-color: #FFF6EC; /* ベースカラー */
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -121,13 +121,13 @@ h2 {
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
     transition: background-color 0.3s ease;
 }
 
 .pagination .step-links a:hover {
-    background-color: #B5784F;
+    background-color: #d2e479;
 }
 @media (max-width: 768px) {
     .inquiry-list-container {

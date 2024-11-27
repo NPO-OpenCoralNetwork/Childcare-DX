@@ -7,7 +7,7 @@
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -25,7 +25,7 @@ h2 {
 .chat-link {
     text-align: center;
     text-decoration: none;
-    color: #D2986A; /* アクセントカラー */
+    color: #d2e479; /* アクセントカラー */
     font-weight: bold;
     padding: 10px;
     border-radius: 5px;
@@ -34,12 +34,12 @@ h2 {
 }
 
 .chat-link:hover {
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
 }
 
 .no-chat {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     font-style: italic;
 }
@@ -53,7 +53,7 @@ h2 {
 
 .search-input {
     padding: 10px;
-    border: 2px solid #D2986A; /* アクセントカラー */
+    border: 2px solid #d2e479; /* アクセントカラー */
     border-radius: 5px 0 0 5px;
     outline: none;
     flex: 1;
@@ -61,7 +61,7 @@ h2 {
 
 .search-button {
     padding: 10px;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     border: none;
     border-radius: 0 5px 5px 0;
@@ -71,7 +71,7 @@ h2 {
 }
 
 .search-button:hover {
-    background-color: #B5784F; /* アクセントカラーを少し暗く */
+    background-color: #d2e479; /* アクセントカラーを少し暗く */
 }
 
 .responder-list {
@@ -86,7 +86,7 @@ h2 {
 
 .responder-link {
     text-decoration: none;
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     padding: 10px;
     border-radius: 5px;
     display: block;
@@ -94,13 +94,13 @@ h2 {
 }
 
 .responder-link:hover {
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
 }
 
 .no-responder {
     text-align: center;
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     font-style: italic;
 }
 @media (max-width: 768px) {

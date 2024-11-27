@@ -8,7 +8,7 @@
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -19,7 +19,7 @@ form {
 }
 
 form label {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -28,7 +28,7 @@ form input,
 form textarea,
 form select {
     padding: 10px;
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     border-radius: 5px;
     margin-bottom: 15px;
     font-size: 1em;
@@ -37,7 +37,7 @@ form select {
 
 form button {
     padding: 10px 20px;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     border: none;
     border-radius: 5px;
@@ -48,7 +48,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #B5784F; /* アクセントカラーを少し暗く */
+    background-color: #d2e479; /* アクセントカラーを少し暗く */
 }
 .tags-container {
     display: flex;
@@ -59,7 +59,7 @@ form button:hover {
 .tag {
     display: inline-block;
     background-color: #FFF6EC; /* ベースカラー */
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;

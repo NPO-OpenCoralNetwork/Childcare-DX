@@ -9,7 +9,7 @@
 }
 
 h2 {
-    color: #4B4D37;
+    color: #797a94;
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: center;
@@ -30,7 +30,7 @@ h2 {
 .inquiry-link, .announcement-link {
     text-align: center;
     text-decoration: none;
-    color: #D2986A;
+    color: #d2e479;
     font-weight: bold;
     padding: 8px;
     border-radius: 5px;
@@ -39,7 +39,7 @@ h2 {
 }
 
 .inquiry-link:hover, .announcement-item:hover {
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
 }
 
@@ -62,13 +62,13 @@ h2 {
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
-    background-color: #D2986A;
+    background-color: #d2e479;
     color: #FFF6EC;
     transition: background-color 0.3s ease;
 }
 
 .pagination .step-links a:hover {
-    background-color: #B5784F;
+    background-color: #d2e479;
 }
 
 /* レスポンシブ対応の追加 */

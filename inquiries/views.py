@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import UserProfile
 from django.core.mail import send_mail
 from django.contrib import messages
-from carehelper import settings
+from childhelper import settings
 
 class InquiryListView(ListView):
     model = Inquiry

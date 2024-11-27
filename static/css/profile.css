@@ -8,7 +8,7 @@
 }
 
 h2 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -43,7 +43,7 @@ form {
 }
 
 form label {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     margin-bottom: 5px;
     margin-top: 10px;
     font-weight: bold;
@@ -53,7 +53,7 @@ form label {
 .custom-file-upload {
     display: inline-block;
     cursor: pointer;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     padding: 10px 20px;
     border-radius: 5px;
@@ -61,7 +61,7 @@ form label {
 }
 
 .clear-file-button {
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     border: none;
     border-radius: 5px;
@@ -75,7 +75,7 @@ form label {
 
 .clear-file-button:hover,
 .clear-file-button.active { /* クリック後もホバー色を適用 */
-    background-color: #4B4D37; /* テキストカラー */
+    background-color: #797a94; /* テキストカラー */
 }
 form .profile-image-url {
     display: none; /* Hide the URL display */
@@ -83,7 +83,7 @@ form .profile-image-url {
 form textarea,
 form select {
     padding: 10px;
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     border-radius: 5px;
     margin-bottom: 15px;
     font-size: 1em;
@@ -97,7 +97,7 @@ form select {
 
 form button {
     padding: 10px 20px;
-    background-color: #D2986A; /* アクセントカラー */
+    background-color: #d2e479; /* アクセントカラー */
     color: #FFF6EC; /* ベースカラー */
     border: none;
     border-radius: 5px;
@@ -109,17 +109,17 @@ form button {
 }
 
 form button:hover {
-    background-color: #B5784F; /* アクセントカラーを少し暗く */
+    background-color: #d2e479; /* アクセントカラーを少し暗く */
 }
 
 p {
     font-size: large;
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     margin-bottom: 20px;
 }
 
 .delete-section h3 {
-    color: #4B4D37;
+    color: #797a94;
     margin-top: 30px;
 }
 
@@ -131,14 +131,14 @@ p {
     margin-top: 30px;
     padding: 10px;
     background-color: #FFF6EC; /* ベースカラー */
-    border: 1px solid #D2986A; /* アクセントカラー */
+    border: 1px solid #d2e479; /* アクセントカラー */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .inquiry-history h3 {
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     margin-bottom: 15px;
     text-align: center;
 }
@@ -150,7 +150,7 @@ p {
 
 .inquiry-history li {
     padding: 10px;
-    border-bottom: 1px solid #D2986A; /* アクセントカラー */
+    border-bottom: 1px solid #d2e479; /* アクセントカラー */
 }
 
 .inquiry-history li:last-child {
@@ -159,13 +159,13 @@ p {
 
 .inquiry-history a {
     text-decoration: none;
-    color: #4B4D37; /* テキストカラー */
+    color: #797a94; /* テキストカラー */
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .inquiry-history a:hover {
-    color: #D2986A; /* アクセントカラー */
+    color: #d2e479; /* アクセントカラー */
 }
 
 /* レスポンシブ対応 */

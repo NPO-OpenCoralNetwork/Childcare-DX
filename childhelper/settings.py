@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-25_y&!1l(ek3w-^bd^ts=64f-=ue-j5oz&@bj9r4o8_l39n#y7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = [ 'forcarer-361965a317c9.herokuapp.com','www.forcarer.org','localhost']
 
 # CORS_ALLOW_ALL_ORIGINS = True
@@ -87,7 +87,7 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER='www.focarer@gmail.com'
 EMAIL_HOST_PASSWORD='tqyb ekdo hgnf sfyy'
 DEFAULT_FROM_EMAIL = 'no-reply@forcarer.org'
-ROOT_URLCONF = 'carehelper.urls'
+ROOT_URLCONF = 'childhelper.urls'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30日
@@ -104,6 +104,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 
             ],
         },
@@ -140,7 +141,7 @@ SIMPLE_JWT = {
 STRIPE_SECRET_KEY = 'your_secret_key_here'
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 
-WSGI_APPLICATION = 'carehelper.wsgi.application'
+WSGI_APPLICATION = 'childhelper.wsgi.application'
 SITE_ID = 1
 
 CHANNEL_LAYERS = {
@@ -198,7 +199,7 @@ DEFAULT_CHARSET = 'utf-8'
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -214,7 +215,9 @@ if not DEBUG:
     }
 
 # Cloudinaryをデフォルトのメディアストレージに設定
-MEDIA_URL = f'https://res.cloudinary.com/{os.getenv("CLOUDINARY_CLOUD_NAME")}/'
+# MEDIA_URL = f'https://res.cloudinary.com/{os.getenv("CLOUDINARY_CLOUD_NAME")}/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
