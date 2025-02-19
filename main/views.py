@@ -6,6 +6,7 @@ from accounts.models import UserProfile
 from .models import Announcement
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .models import ChildSupportInfo
 
 def home_view(request):
 
@@ -62,3 +63,11 @@ def chat_list_view(request):
 def announcement_detail_view(request, pk):
     announcement = get_object_or_404(Announcement, pk=pk)
     return render(request, 'main/announcement_detail.html', {'announcement': announcement})
+
+def child_support_list(request):
+    infos = ChildSupportInfo.objects.all()
+    return render(request, 'main/child_support_list.html', {'child_support_infos': infos})
+
+def child_support_detail(request, pk):
+    child_support_info = get_object_or_404(ChildSupportInfo, pk=pk)
+    return render(request, 'main/child_support_detail.html', {'child_support_info': child_support_info})

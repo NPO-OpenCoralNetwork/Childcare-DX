@@ -1,72 +1,349 @@
 from django.db import models
 
+class allowed(models.Model):
+    # 法人等関連
+    corporation_type = models.TextField(db_column='法人等の種類', blank=True, null=True)
+    corporation_name_furigana = models.TextField(db_column='法人等の名称(ふりがな)', blank=True, null=True)
+    corporation_name = models.TextField(db_column='法人等の名称', blank=True, null=True)
+    houjin_zipcode = models.TextField(db_column='法人等の主たる事務所の所在地_郵便番号', blank=True, null=True)
+    houjin_address_pref = models.TextField(db_column='法人等の主たる事務所の所在地_都道府県', blank=True, null=True)
+    houjin_address_city = models.TextField(db_column='法人等の主たる事務所の所在地_市区町村', blank=True, null=True)
+    houjin_address_town = models.TextField(db_column='法人等の主たる事務所の所在地_町名・番地', blank=True, null=True)
+    houjin_address_building = models.TextField(db_column='法人等の主たる事務所の所在地_建物名・部屋', blank=True, null=True)
+    houjin_phone = models.TextField(db_column='法人等の連絡先_電話番号', blank=True, null=True)
+    houjin_other_contact = models.TextField(db_column='法人等の連絡先_その他連絡先', blank=True, null=True)
+    houjin_representative_name = models.TextField(db_column='法人等代表者の氏名', blank=True, null=True)
+    houjin_representative_role = models.TextField(db_column='法人等代表者の職名', blank=True, null=True)
+    houjin_established_date = models.TextField(db_column='法人等の設立年月日', blank=True, null=True)
+    corporation_education_childcare = models.TextField(
+        db_column='法人が教育・保育を提供し、又は提供しようと',
+        blank=True, null=True
+    )
 
-class Jigyousha(models.Model):
-    todofuken_code = models.BigIntegerField(db_column='都道府県コード又は市町村コード')
-    no = models.TextField(db_column='No',primary_key=True)
-    todofuken_name = models.TextField(db_column='都道府県名')
-    shichoson_name = models.TextField(db_column='市区町村名')
-    jigyousho_name = models.TextField(db_column='事業所名')
-    jigyousho_name_kana = models.TextField(db_column='事業所名カナ')
-    service_type = models.TextField(db_column='サービスの種類')
-    address = models.TextField(db_column='住所')
-    building_name = models.TextField(db_column='方書（ビル名等）', blank=True, null=True)
-    latitude = models.FloatField(db_column='緯度', blank=True, null=True)
-    longitude = models.FloatField(db_column='経度', blank=True, null=True)
-    phone_number = models.TextField(db_column='電話番号', blank=True, null=True)
-    fax_number = models.TextField(db_column='FAX番号', blank=True, null=True)
-    houjin_number = models.FloatField(db_column='法人番号', blank=True, null=True)
-    houjin_name = models.TextField(db_column='法人の名称', blank=True, null=True)
+    # 施設基本情報
+    facility_type = models.TextField(db_column='施設類型', blank=True, null=True)
+    facility_name_furigana = models.TextField(db_column='施設の名称(ふりがな)', blank=True, null=True)
+    facility_name = models.TextField(db_column='施設の名称', blank=True, null=True)
     jigyousho_number = models.TextField(db_column='事業所番号', blank=True, null=True)
-    available_days = models.TextField(db_column='利用可能曜日', blank=True, null=True)
-    special_notes = models.TextField(db_column='利用可能曜日特記事項', blank=True, null=True)
-    capacity = models.FloatField(db_column='定員', blank=True, null=True)
-    url = models.TextField(db_column='URL', blank=True, null=True)
-    kogei_shogaisha_taiyo = models.TextField(db_column='高齢者の方と障害者の方が同時一体的に利用で', blank=True, null=True)
-    kaigo_hoken = models.TextField(db_column='介護保険の通常の指定基準を満たしている', blank=True, null=True)
-    shogai_fukushi = models.TextField(db_column='障害福祉の通常の指定基準を満たしている', blank=True, null=True)
-    notes = models.TextField(db_column='備考', blank=True, null=True)
+    facility_zipcode = models.TextField(db_column='郵便番号', blank=True, null=True)
+    facility_address_pref = models.TextField(db_column='施設の所在地 都道府県', blank=True, null=True)
+    facility_address_city = models.TextField(db_column='施設の所在地 市区町村', blank=True, null=True)
+    facility_address_town = models.TextField(db_column='施設の所在地 町名・番地', blank=True, null=True)
+    facility_address_building = models.TextField(db_column='施設の所在地 建物名・部屋番号等', blank=True, null=True)
+    facility_phone = models.TextField(db_column='施設の連絡先 電話番号', blank=True, null=True)
+    facility_other_contact = models.TextField(db_column='施設の連絡先 その他連絡先', blank=True, null=True)
+    facility_operator = models.TextField(db_column='施設の設置主体', blank=True, null=True)
+    facility_manager_name = models.TextField(db_column='施設 管理者氏名', blank=True, null=True)
+    facility_manager_role = models.TextField(db_column='施設 管理者職名', blank=True, null=True)
+
+    # 事業関連日付
+    project_approval_date = models.TextField(db_column='事業の認可年月日', blank=True, null=True)
+    project_start_date = models.TextField(db_column='事業の開始年月日', blank=True, null=True)
+    project_confirmation_date = models.TextField(db_column='事業の確認年月日', blank=True, null=True)
+    
+    # 営業状況
+    business_status = models.TextField(db_column='営業状況', blank=True, null=True)
+
+    # 従業者数・経験年数 (保育教諭, 教諭又は保育士, 保育士, 保育従事者, 教諭, etc.)
+    hoiku_kyoyu_fulltime = models.TextField(db_column='保育教諭_従業者数_常勤', blank=True, null=True)
+    hoiku_kyoyu_parttime = models.TextField(db_column='保育教諭_従業者数_非常勤', blank=True, null=True)
+    hoiku_kyoyu_worktime = models.TextField(db_column='保育教諭_労働時間', blank=True, null=True)
+    hoiku_kyoyu_exp_fulltime = models.TextField(db_column='保育教諭_平均経験年数_常勤', blank=True, null=True)
+    hoiku_kyoyu_exp_parttime = models.TextField(db_column='保育教諭_平均経験年数_非常勤', blank=True, null=True)
+
+    kyoyu_hoikushi_fulltime = models.TextField(db_column='教諭又は保育士_従業者数_常勤', blank=True, null=True)
+    kyoyu_hoikushi_parttime = models.TextField(db_column='教諭又は保育士_従業者数_非常勤', blank=True, null=True)
+    kyoyu_hoikushi_worktime = models.TextField(db_column='教諭又は保育士_労働時間', blank=True, null=True)
+    kyoyu_hoikushi_exp_fulltime = models.TextField(db_column='教諭又は保育士_平均経験年数_常勤', blank=True, null=True)
+    kyoyu_hoikushi_exp_parttime = models.TextField(db_column='教諭又は保育士_平均経験年数_非常勤', blank=True, null=True)
+
+    hoikushi_fulltime = models.TextField(db_column='保育士_従業者数_常勤', blank=True, null=True)
+    hoikushi_parttime = models.TextField(db_column='保育士_従業者数_非常勤', blank=True, null=True)
+    hoikushi_worktime = models.TextField(db_column='保育士_労働時間', blank=True, null=True)
+    hoikushi_exp_fulltime = models.TextField(db_column='保育士_平均経験年数_常勤', blank=True, null=True)
+    hoikushi_exp_parttime = models.TextField(db_column='保育士_平均経験年数_非常勤', blank=True, null=True)
+
+    hoiku_workers_fulltime = models.TextField(db_column='保育従事者_従業者数_常勤', blank=True, null=True)
+    hoiku_workers_parttime = models.TextField(db_column='保育従事者_従業者数_非常勤', blank=True, null=True)
+    hoiku_workers_worktime = models.TextField(db_column='保育従事者_労働時間', blank=True, null=True)
+    hoiku_workers_exp_fulltime = models.TextField(db_column='保育従事者_平均経験年数_常勤', blank=True, null=True)
+    hoiku_workers_exp_parttime = models.TextField(db_column='保育従事者_平均経験年数_非常勤', blank=True, null=True)
+
+    kyoyu_fulltime = models.TextField(db_column='教諭_従業者数_常勤', blank=True, null=True)
+    kyoyu_parttime = models.TextField(db_column='教諭_従業者数_非常勤', blank=True, null=True)
+    kyoyu_worktime = models.TextField(db_column='教諭_労働時間', blank=True, null=True)
+    kyoyu_exp_fulltime = models.TextField(db_column='教諭_平均経験年数_常勤', blank=True, null=True)
+    kyoyu_exp_parttime = models.TextField(db_column='教諭_平均経験年数_非常勤', blank=True, null=True)
+
+    katei_hoiku_fulltime = models.TextField(db_column='家庭的保育者_常勤', blank=True, null=True)
+    katei_hoiku_assistant_parttime = models.TextField(db_column='家庭的保育補助者_非常勤', blank=True, null=True)
+    katei_hoiku_worktime = models.TextField(db_column='家庭的保育者_労働時間', blank=True, null=True)
+    katei_hoiku_exp_fulltime = models.TextField(db_column='家庭的保育者_平均経験年数_常勤', blank=True, null=True)
+    katei_hoiku_exp_parttime = models.TextField(db_column='家庭的保育者_平均経験年数_非常勤', blank=True, null=True)
+
+    kango_fulltime = models.TextField(db_column='看護師_従業者数_常勤', blank=True, null=True)
+    kango_parttime = models.TextField(db_column='看護師_従業者数_非常勤', blank=True, null=True)
+    kango_worktime = models.TextField(db_column='看護師_労働時間', blank=True, null=True)
+    kango_exp_fulltime = models.TextField(db_column='看護師_平均経験年数_常勤', blank=True, null=True)
+    kango_exp_parttime = models.TextField(db_column='看護師_平均経験年数_非常勤', blank=True, null=True)
+
+    total_fulltime = models.TextField(db_column='合計_従業者数_常勤', blank=True, null=True)
+    total_parttime = models.TextField(db_column='合計_従業者数_非常勤', blank=True, null=True)
+    children_per_staff = models.TextField(db_column='職員一人当たりの子どもの数', blank=True, null=True)
+
+    # 免許・資格
+    licenses = models.TextField(db_column='有する免許・資格', blank=True, null=True)
+    licenses_other = models.TextField(db_column='有する免許・資格_その他', blank=True, null=True)
+
+    # 開所日・開所時間
+    open_days = models.TextField(db_column='開所日_開所曜日', blank=True, null=True)
+    weekday_open = models.TextField(db_column='開所日_平日開所時間', blank=True, null=True)
+    weekday_close = models.TextField(db_column='開所日_平日閉所時間', blank=True, null=True)
+    saturday_open = models.TextField(db_column='開所日_土曜日開所時間', blank=True, null=True)
+    saturday_close = models.TextField(db_column='開所日_土曜日閉所時間', blank=True, null=True)
+    sunday_open = models.TextField(db_column='開所日_日祝日開所時間', blank=True, null=True)
+    sunday_close = models.TextField(db_column='開所日_日祝日閉所時間', blank=True, null=True)
+    extended_am_open = models.TextField(db_column='開所日_延長保育午前開所時間', blank=True, null=True)
+    extended_am_close = models.TextField(db_column='開所日_延長保育午前閉所時間', blank=True, null=True)
+    extended_pm_open = models.TextField(db_column='開所日_延長保育午後開所時間', blank=True, null=True)
+    extended_pm_close = models.TextField(db_column='開所日_延長保育午後閉所時間', blank=True, null=True)
+
+    # 預かり保育時間
+    azukari_weekday_open = models.TextField(db_column='預かり保育時間_平日開所', blank=True, null=True)
+    azukari_weekday_close = models.TextField(db_column='預かり保育時間_平日閉所', blank=True, null=True)
+    azukari_saturday_open = models.TextField(db_column='預かり保育時間_土曜日開所', blank=True, null=True)
+    azukari_saturday_close = models.TextField(db_column='預かり保育時間_土曜日閉所', blank=True, null=True)
+    azukari_sunday_open = models.TextField(db_column='預かり保育時間_日祝日開所', blank=True, null=True)
+    azukari_sunday_close = models.TextField(db_column='預かり保育時間_日祝日閉所', blank=True, null=True)
+
+    # 利用定員・利用者数
+    age0_capacity = models.TextField(db_column='0歳_利用定員数', blank=True, null=True)
+    age0_users = models.TextField(db_column='0歳_利用者数', blank=True, null=True)
+    age0_classes = models.TextField(db_column='0歳_学級数', blank=True, null=True)
+    age1_capacity = models.TextField(db_column='1歳_利用定員数', blank=True, null=True)
+    age1_users = models.TextField(db_column='1歳_利用者数', blank=True, null=True)
+    age1_classes = models.TextField(db_column='1歳_学級数', blank=True, null=True)
+    age2_capacity = models.TextField(db_column='2歳_利用定員数', blank=True, null=True)
+    age2_users = models.TextField(db_column='2歳_利用者数', blank=True, null=True)
+    age2_classes = models.TextField(db_column='2歳_学級数', blank=True, null=True)
+    age3_capacity = models.TextField(db_column='3歳_利用定員数', blank=True, null=True)
+    age3_users = models.TextField(db_column='3歳_利用者数', blank=True, null=True)
+    age3_classes = models.TextField(db_column='3歳_学級数', blank=True, null=True)
+    age4_capacity = models.TextField(db_column='4歳_利用定員数', blank=True, null=True)
+    age4_users = models.TextField(db_column='4歳_利用者数', blank=True, null=True)
+    age4_classes = models.TextField(db_column='4歳_学級数', blank=True, null=True)
+    age5_capacity = models.TextField(db_column='5歳_利用定員数', blank=True, null=True)
+    age5_users = models.TextField(db_column='5歳_利用者数', blank=True, null=True)
+    age5_classes = models.TextField(db_column='5歳_学級数', blank=True, null=True)
+    total_capacity = models.TextField(db_column='合計_利用定員数', blank=True, null=True)
+    total_users = models.TextField(db_column='合計_利用者数', blank=True, null=True)
+    total_classes = models.TextField(db_column='合計_学級数', blank=True, null=True)
+
+    # 運営方法・保育内容
+    operation_method = models.TextField(db_column='運営方法', blank=True, null=True)
+    education_content = models.TextField(db_column='教育・保育の内容等', blank=True, null=True)
+
+    # 給食
+    lunch_status = models.TextField(db_column='給食の実施状況_実施状況', blank=True, null=True)
+    lunch_days = models.TextField(db_column='給食の実施状況_提供日', blank=True, null=True)
+
+    # 障害児、一時預かり、病児保育
+    disability_support = models.TextField(db_column='障害児の受け入れ体制', blank=True, null=True)
+    temporary_care = models.TextField(db_column='一時預かり事業の実施', blank=True, null=True)
+    sick_childcare = models.TextField(db_column='病児保育事業の実施', blank=True, null=True)
+
+    # 施設面積等
+    room_area = models.TextField(db_column='居室面積', blank=True, null=True)
+    building_area = models.TextField(db_column='園舎面積', blank=True, null=True)
+    yard_area = models.TextField(db_column='園庭面積', blank=True, null=True)
+
+    # 利用・苦情・賠償
+    usage_procedure = models.TextField(db_column='利用手続き', blank=True, null=True)
+    selection_criteria = models.TextField(db_column='選考基準', blank=True, null=True)
+    other_usage = models.TextField(db_column='その他の利用', blank=True, null=True)
+    complaints_contact = models.TextField(db_column='苦情に対する窓口状況', blank=True, null=True)
+    compensation_policy = models.TextField(db_column='賠償すべき事故への対応', blank=True, null=True)
+    service_features = models.TextField(db_column='提供内容の特色', blank=True, null=True)
+
+    # 利用料関連
+    actual_cost_charged = models.TextField(db_column='利用料_実費徴収_実費徴収の有無', blank=True, null=True)
+    actual_cost_reason = models.TextField(db_column='利用料_実費徴収_理由', blank=True, null=True)
+    actual_cost_amount = models.TextField(db_column='利用料_実費徴収_金額', blank=True, null=True)
+    surcharge_charged = models.TextField(db_column='利用料_上乗せ徴収_上乗せ徴収の有無', blank=True, null=True)
+    surcharge_reason = models.TextField(db_column='利用料_上乗せ徴収_理由', blank=True, null=True)
+    surcharge_amount = models.TextField(db_column='利用料_上乗せ徴収_金額', blank=True, null=True)
+
+    # 説明や同意、苦情対応など
+    explanation_at_start = models.TextField(db_column='提供開始時の説明', blank=True, null=True)
+    user_consent = models.TextField(db_column='利用者の同意', blank=True, null=True)
+    fee_explanation = models.TextField(db_column='利用者負担の利用料に関する説明', blank=True, null=True)
+    complaint_handling = models.TextField(db_column='相談、苦情等の対応のための取組', blank=True, null=True)
+    accident_prevention = models.TextField(db_column='事故発生の防止及び発生時の対応', blank=True, null=True)
+    privacy_policy = models.TextField(db_column='個人情報等の取組状況', blank=True, null=True)
+    third_party_evaluation = models.TextField(db_column='第三者評価等の実施・結果の公表状況', blank=True, null=True)
+    third_party_result = models.TextField(db_column='第三者評価等の結果', blank=True, null=True)
+
+    # id (主キー) - 既存テーブルにある "id" カラムを使う場合
+    id = models.IntegerField(primary_key=True, db_column='id')
+
 
     class Meta:
-        db_table = 'jigyousha'  # 既存のテーブル名を指定
+        
+        db_table = 'allowed'  
+        # 既存テーブルを Django が変更しないようにするなら
+        managed = False
 
-    def __str__(self):
-        return self.jigyousho_name
 
 
-class SJigyousha(models.Model):
-    todofuken_code = models.BigIntegerField(db_column="都道府県コード又は市区町村コード")  # 都道府県コード又は市区町村コード
-    no = models.IntegerField(primary_key=True, db_column="NO（※システム内の固有の番号、連番）")  # NO（※システム内の固有の番号、連番）
-    shitei_kikan_name = models.TextField(db_column="指定機関名")  # 指定機関名
-    houjin_name = models.TextField(db_column="法人の名称")  # 法人の名称
-    houjin_name_kana = models.TextField(db_column="法人の名称_かな")  # 法人の名称_かな
-    houjin_number = models.BigIntegerField(db_column="法人番号")  # 法人番号
-    houjin_address_city = models.TextField(db_column="法人住所（市区町村）")  # 法人住所（市区町村）
-    houjin_address_street = models.TextField(db_column="法人住所（番地以降）")  # 法人住所（番地以降）
-    houjin_phone_number = models.CharField(max_length=20, db_column="法人電話番号")  # 法人電話番号
-    houjin_fax_number = models.CharField(max_length=20, null=True, blank=True, db_column="法人FAX番号")  # 法人FAX番号
-    houjin_url = models.URLField(null=True, blank=True, db_column="法人URL")  # 法人URL
-    service_type = models.TextField(db_column="サービス種別")  # サービス種別
-    jigyousho_name = models.TextField(db_column="事業所の名称")  # 事業所の名称
-    jigyousho_name_kana = models.TextField(db_column="事業所の名称_かな")  # 事業所の名称_かな
-    jigyousho_number = models.CharField(max_length=255, db_column="事業所番号")  # 事業所番号
-    jigyousho_address_city = models.TextField(db_column="事業所住所（市区町村）")  # 事業所住所（市区町村）
-    jigyousho_address_street = models.TextField(db_column="事業所住所（番地以降）")  # 事業所住所（番地以降）
-    jigyousho_phone_number = models.CharField(max_length=20, db_column="事業所電話番号")  # 事業所電話番号
-    jigyousho_fax_number = models.CharField(max_length=20, null=True, blank=True, db_column="事業所FAX番号")  # 事業所FAX番号
-    jigyousho_url = models.URLField(null=True, blank=True, db_column="事業所URL")  # 事業所URL
-    jigyousho_latitude = models.FloatField(null=True, blank=True, db_column="事業所緯度")  # 事業所緯度
-    jigyousho_longitude = models.FloatField(null=True, blank=True, db_column="事業所経度")  # 事業所経度
-    available_time_weekdays = models.TextField(null=True, blank=True, db_column="利用可能な時間帯（平日）")  # 利用可能な時間帯（平日）
-    available_time_saturday = models.TextField(null=True, blank=True, db_column="利用可能な時間帯（土曜）")  # 利用可能な時間帯（土曜）
-    available_time_sunday = models.TextField(null=True, blank=True, db_column="利用可能な時間帯（日曜）")  # 利用可能な時間帯（日曜）
-    available_time_holiday = models.TextField(null=True, blank=True, db_column="利用可能な時間帯（祝日）")  # 利用可能な時間帯（祝日）
-    closed_days = models.TextField(null=True, blank=True, db_column="定休日")  # 定休日
-    available_days_note = models.TextField(null=True, blank=True, db_column="利用可能曜日特記事項（留意事項）")  # 利用可能曜日特記事項（留意事項）
-    capacity = models.IntegerField(null=True, blank=True, db_column="定員")  # 定員
+
+
+class disallowed(models.Model):
+
+    facility_office_name = models.TextField(db_column='施設・事業所名', blank=True, null=True)
+    corporation_type = models.TextField(db_column='設置者（法人格）', blank=True, null=True)
+    corporation_name = models.TextField(db_column='設置者名', blank=True, null=True)
+    manager = models.TextField(db_column='管理者', blank=True, null=True)
+    zipcode = models.TextField(db_column='郵便番号', blank=True, null=True)
+    address_pref = models.TextField(db_column='施設の所在地 都道府県', blank=True, null=True)
+    address_city = models.TextField(db_column='施設の所在地 市区町村', blank=True, null=True)
+    address_street = models.TextField(db_column='施設の所在地 町名・番地', blank=True, null=True)
+    address_building = models.TextField(db_column='施設の所在地 建物名・部屋番号等', blank=True, null=True)
+    phone = models.TextField(db_column='電話番号', blank=True, null=True)
+    access_train_line = models.TextField(db_column='交通手段_最寄り駅_線', blank=True, null=True)
+    access_train_station = models.TextField(db_column='交通手段_最寄り駅_駅', blank=True, null=True)
+    access_bus = models.TextField(db_column='交通手段_バス', blank=True, null=True)
+    access_walk = models.TextField(db_column='交通手段_徒歩', blank=True, null=True)
+    project_start_date = models.TextField(db_column='事業の開始年月日', blank=True, null=True)
+    notification_date = models.TextField(db_column='届け出受理日', blank=True, null=True)
+    facility_type = models.TextField(db_column='施設類型', blank=True, null=True)
+    facility_operator = models.TextField(db_column='施設の設置主体', blank=True, null=True)
+    corporate_led = models.TextField(db_column='企業主導型保育事業', blank=True, null=True)
+    certificate_date = models.TextField(db_column='指導監督基準適合証明書交付（交付年月日）', blank=True, null=True)
+    business_status = models.TextField(db_column='営業状況', blank=True, null=True)
+    remarks = models.TextField(db_column='備考', blank=True, null=True)
+    building_structure = models.TextField(db_column='建物構造', blank=True, null=True)
+    building_structure_floor = models.TextField(db_column='建物構造（階層）', blank=True, null=True)
+    building_form = models.TextField(db_column='建物形態', blank=True, null=True)
+    hoikusitsu_rooms = models.TextField(db_column='保育室_部屋数', blank=True, null=True)
+    hoikusitsu_area = models.TextField(db_column='保育室_面積', blank=True, null=True)
+    kitchen_rooms = models.TextField(db_column='調理室_部屋数', blank=True, null=True)
+    kitchen_area = models.TextField(db_column='調理室_面積', blank=True, null=True)
+    medical_rooms = models.TextField(db_column='医務室_部屋数', blank=True, null=True)
+    medical_area = models.TextField(db_column='医務室_面積', blank=True, null=True)
+    toilet_rooms = models.TextField(db_column='便所_部屋数', blank=True, null=True)
+    toilet_area = models.TextField(db_column='便所_面積', blank=True, null=True)
+    other_rooms = models.TextField(db_column='その他_部屋数', blank=True, null=True)
+    other_area = models.TextField(db_column='その他_面積', blank=True, null=True)
+    total_area = models.TextField(db_column='合計_面積', blank=True, null=True)
+    remarks_1 = models.TextField(db_column='備考.1', blank=True, null=True)
+    capacity_flag = models.TextField(db_column='利用定員の有無', blank=True, null=True)
+    age0_capacity = models.TextField(db_column='0歳-利用定員数', blank=True, null=True)
+    age0_users = models.TextField(db_column='0歳-利用児童数', blank=True, null=True)
+    age1_capacity = models.TextField(db_column='1歳-利用定員数', blank=True, null=True)
+    age1_users = models.TextField(db_column='1歳-利用児童数', blank=True, null=True)
+    age2_capacity = models.TextField(db_column='2歳-利用定員数', blank=True, null=True)
+    age2_users = models.TextField(db_column='2歳-利用児童数', blank=True, null=True)
+    age3_capacity = models.TextField(db_column='3歳-利用定員数', blank=True, null=True)
+    age3_users = models.TextField(db_column='3歳-利用児童数', blank=True, null=True)
+    age4_capacity = models.TextField(db_column='4歳-利用定員数', blank=True, null=True)
+    age4_users = models.TextField(db_column='4歳-利用児童数', blank=True, null=True)
+    age5_capacity = models.TextField(db_column='5歳-利用定員数', blank=True, null=True)
+    age5_users = models.TextField(db_column='5歳-利用児童数', blank=True, null=True)
+    total_capacity = models.TextField(db_column='合計-利用定員数', blank=True, null=True)
+    total_users = models.TextField(db_column='合計-利用児童数', blank=True, null=True)
+    remarks_2 = models.TextField(db_column='備考.2', blank=True, null=True)
+    weekday_open = models.TextField(db_column='開所閉所時間_平日開所', blank=True, null=True)
+    weekday_close = models.TextField(db_column='開所閉所時間_平日閉所', blank=True, null=True)
+    saturday_open = models.TextField(db_column='開所閉所時間_土曜開所', blank=True, null=True)
+    saturday_close = models.TextField(db_column='開所閉所時間_土曜閉所', blank=True, null=True)
+    sunday_open = models.TextField(db_column='開所閉所時間_日祝日開所', blank=True, null=True)
+    sunday_close = models.TextField(db_column='開所閉所時間_日祝日閉所', blank=True, null=True)
+    extended_hoiku_flag = models.TextField(db_column='延長保育_有無', blank=True, null=True)
+    extended_hoiku_time = models.TextField(db_column='延長保育_時間', blank=True, null=True)
+    temporary_care = models.TextField(db_column='一時保育', blank=True, null=True)
+    night_care = models.TextField(db_column='夜間保育', blank=True, null=True)
+    care_24h = models.TextField(db_column='24時間保育', blank=True, null=True)
+    sick_childcare = models.TextField(db_column='病児保育', blank=True, null=True)
+    monthly_fee_age0 = models.TextField(db_column='保育料_月極額_0歳', blank=True, null=True)
+    monthly_fee_age1 = models.TextField(db_column='保育料_月極額_1歳', blank=True, null=True)
+    monthly_fee_age2 = models.TextField(db_column='保育料_月極額_2歳', blank=True, null=True)
+    monthly_fee_age3 = models.TextField(db_column='保育料_月極額_3歳', blank=True, null=True)
+    monthly_fee_age4 = models.TextField(db_column='保育料_月極額_4歳', blank=True, null=True)
+    monthly_fee_age5 = models.TextField(db_column='保育料_月極額_5歳', blank=True, null=True)
+    contract_fee_age0 = models.TextField(db_column='保育料_定期契約_0歳', blank=True, null=True)
+    contract_fee_age1 = models.TextField(db_column='保育料_定期契約_1歳', blank=True, null=True)
+    contract_fee_age2 = models.TextField(db_column='保育料_定期契約_2歳', blank=True, null=True)
+    contract_fee_age3 = models.TextField(db_column='保育料_定期契約_3歳', blank=True, null=True)
+    contract_fee_age4 = models.TextField(db_column='保育料_定期契約_4歳', blank=True, null=True)
+    contract_fee_age5 = models.TextField(db_column='保育料_定期契約_5歳', blank=True, null=True)
+    dropin_fee_age0 = models.TextField(db_column='保育料_一時預かり_0歳', blank=True, null=True)
+    dropin_fee_age1 = models.TextField(db_column='保育料_一時預かり_1歳', blank=True, null=True)
+    dropin_fee_age2 = models.TextField(db_column='保育料_一時預かり_2歳', blank=True, null=True)
+    dropin_fee_age3 = models.TextField(db_column='保育料_一時預かり_3歳', blank=True, null=True)
+    dropin_fee_age4 = models.TextField(db_column='保育料_一時預かり_4歳', blank=True, null=True)
+    dropin_fee_age5 = models.TextField(db_column='保育料_一時預かり_5歳', blank=True, null=True)
+    extra_fee_meals = models.TextField(db_column='保育料以外の実費_食事代', blank=True, null=True)
+    extra_fee_entry = models.TextField(db_column='保育料以外の実費_入会金', blank=True, null=True)
+    extra_fee_cancel = models.TextField(db_column='保育料以外の実費_キャンセル料', blank=True, null=True)
+    extra_fee_others = models.TextField(db_column='保育料以外の実費_その他', blank=True, null=True)
+    recent_change = models.TextField(db_column='変更を生じたことがある場合にあっては当該変更のうち直近のものの内容及びその理由', blank=True, null=True)
+    remarks_3 = models.TextField(db_column='備考.3', blank=True, null=True)
+    hoiku_workers_fulltime = models.TextField(db_column='保育従事者数_常勤', blank=True, null=True)
+    hoiku_workers_parttime = models.TextField(db_column='保育従事者数_非常勤', blank=True, null=True)
+    qualified_hoikusha = models.TextField(db_column='有資格者数_保育者士', blank=True, null=True)
+    qualified_nurse = models.TextField(db_column='有資格者数_看護師', blank=True, null=True)
+    qualified_kateiteki = models.TextField(db_column='有資格者数_家庭的保育者等', blank=True, null=True)
+    training_visit_care = models.TextField(db_column='研修受講者数_居宅訪問型保育研修', blank=True, null=True)
+    training_child_support = models.TextField(db_column='研修受講者数_子育て支援員研修', blank=True, null=True)
+    training_family_care = models.TextField(db_column='研修受講者数_家庭的保育者等研修', blank=True, null=True)
+    training_other = models.TextField(db_column='研修受講者数_その他', blank=True, null=True)
+    staff_arrangement = models.TextField(db_column='保育士その他の職員の配置予定', blank=True, null=True)
+    remarks_4 = models.TextField(db_column='備考.4', blank=True, null=True)
+    last_year_report = models.TextField(db_column='前年度年次報告提出実績', blank=True, null=True)
+    last_year_audit = models.TextField(db_column='前年度監査実績（改善事項の有無）', blank=True, null=True)
+    stop_order_history = models.TextField(db_column='過去の事業停止命令・施設閉鎖命令の歴有無', blank=True, null=True)
+    gov_penalty_city_01 = models.TextField(db_column='行政処分歴(01)_処分を行った自治体', blank=True, null=True)
+    gov_penalty_type_01 = models.TextField(db_column='行政処分歴(01)_処分の種類', blank=True, null=True)
+    gov_penalty_date_01 = models.TextField(db_column='行政処分歴(01)_処分年月日', blank=True, null=True)
+    insurance_type_01 = models.TextField(db_column='保険(01)_保険の種類', blank=True, null=True)
+    insurance_incident_01 = models.TextField(db_column='保険(01)_保険事故(内容)', blank=True, null=True)
+    insurance_amount_01 = models.TextField(db_column='保険(01)_保険金額', blank=True, null=True)
+    insurance_type_02 = models.TextField(db_column='保険(02)_保険の種類', blank=True, null=True)
+    insurance_incident_02 = models.TextField(db_column='保険(02)_保険事故(内容)', blank=True, null=True)
+    insurance_amount_02 = models.TextField(db_column='保険(02)_保険金額', blank=True, null=True)
+    insurance_type_03 = models.TextField(db_column='保険(03)_保険の種類', blank=True, null=True)
+    insurance_incident_03 = models.TextField(db_column='保険(03)_保険事故(内容)', blank=True, null=True)
+    insurance_amount_03 = models.TextField(db_column='保険(03)_保険金額', blank=True, null=True)
+    emergency_response = models.TextField(db_column='緊急時等における対応方法', blank=True, null=True)
+    disaster_prevention = models.TextField(db_column='非常災害対策', blank=True, null=True)
+    abuse_prevention = models.TextField(db_column='虐待の防止のための措置に関する事項', blank=True, null=True)
+    remarks_6 = models.TextField(db_column='備考.6', blank=True, null=True)
+    matching_site_info = models.TextField(db_column='マッチングサイト関係（※ベビーシッターのみ）', blank=True, null=True)
+    remarks_7 = models.TextField(db_column='備考.7', blank=True, null=True)
+    publication_unlicensed_status = models.TextField(db_column='無償化に係る確認申請の提出状況', blank=True, null=True)
+    publication_corporate_status = models.TextField(db_column='幼児教育・保育の無償化に係る確認申請の提出状況', blank=True, null=True)
+    publication_tokutei_status = models.TextField(db_column='子ども・子育て支援施設等確認の有無', blank=True, null=True)
+    publication_free_childcare = models.TextField(db_column='幼児教育・保育の無償化について', blank=True, null=True)
+    publication_update_date = models.TextField(db_column='情報入力更新日', blank=True, null=True)
+    publication_contact_mail = models.TextField(db_column='連絡用メールアドレス', blank=True, null=True)
+    publication_last_inspect = models.TextField(db_column='直近の立ち入り調査日', blank=True, null=True)
+    publication_homepage = models.TextField(db_column='ホームページ', blank=True, null=True)
+    publication_tokutei_date = models.TextField(db_column='市町から確認を受けた日', blank=True, null=True)
+    publication_inspect_date = models.TextField(db_column='立入調査年月日', blank=True, null=True)
+    publication_inspect_flag = models.TextField(db_column='指摘事項の有無', blank=True, null=True)
+    publication_inspect_contents = models.TextField(db_column='立入調査指摘事項の内容', blank=True, null=True)
+    publication_certificate_flag = models.TextField(db_column='指導監督基準を満たす旨の証明書の有無', blank=True, null=True)
+    publication_free_facility = models.TextField(db_column='無償化対象施設', blank=True, null=True)
+    publication_corporate_assist = models.TextField(db_column='企業主導型保育事業助成決定の有無', blank=True, null=True)
+    publication_local_discretion = models.TextField(db_column='地方裁量型認定こども園の認定の有無', blank=True, null=True)
+    publication_kurume_training = models.TextField(db_column='久留米市が開催する保育施設等職員研修の受講実績（各年度４回開催）', blank=True, null=True)
+    publication_certificate_unlicensed = models.TextField(db_column='「認可外保育施設指導監督基準を満たす旨の証明書」の交付', blank=True, null=True)
 
     class Meta:
-        db_table = 'sjigyousha'  # 既存のテーブル名を指定
-
+        # 既存テーブルに対応させる
+        db_table = 'disallowed'  
+        # 既存テーブルを Django が変更しないようにするなら
+        managed = False
     def __str__(self):
-        return self.jigyousho_name
+        return self.facility_office_name or "No Name"
+

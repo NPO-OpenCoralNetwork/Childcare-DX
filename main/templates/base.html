@@ -5,7 +5,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}育児のなやみ{% endblock %}</title>
+    <title>{% block title %}てとてとって{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,42 +18,86 @@
 <body>
     <div class="wrapper">
         <header>
-            <h1>育児のなやみ</h1>
-            <button class="navbar-toggler" id="navbarToggle">&#9776;</button>
-            <nav id="sidebarMenu">
-                <ul>
+            <div class="header-container">
+                <h1 class="logo">テトテトッテ</h1>
+                <button class="navbar-toggler" id="navbarToggle" aria-label="メニュー">&#9776;</button>
+        <nav class="nav">
+            <ul class="main-nav">
+                <li><a href="{% url 'inquiry_list' %}">🏠運営法人について</a></li>
+                <li><a href="{% url 'donation_overview' %}">〇寄付のご案内</a></li>
+                <li><a href="{% url 'donation_overview' %}">🔎よくある質問</a></li>
+                <li><a href="{% url 'donation_overview' %}">✉お問い合わせ</a></li>
+                <li><a href="{% url 'donation_overview' %}">📜サイトについて</a></li>
+            </ul>
+        </div>
+    </header>
+        <div id="sidebarMenu" class="sidebar-menu">
+            <nav class="pc-nav">
+                <ul class="main-nav">
+                    <li><a href="{% url 'inquiry_list' %}">🏠運営法人について</a></li>
+                    <li><a href="{% url 'donation_overview' %}">〇寄付のご案内</a></li>
+                    <li><a href="{% url 'donation_overview' %}">🔎よくある質問</a></li>
+                    <li><a href="{% url 'donation_overview' %}">✉お問い合わせ</a></li>
+                    <li><a href="{% url 'donation_overview' %}">📜サイトについて</a></li>
+                
                     <li><a href="{% url 'home' %}">ホーム</a></li>
-                    <li><a href="{% url 'search_jigyousha' %}">保育施設検索</a></li>
-                    <li><a href="{% url 'inquiry_list' %}">相談一覧</a></li>
-                    <li><a href="{% url 'donation_overview' %}">寄付のご案内</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' user.pk %}">マイプロフィール</a></li>
-                    <li><a href="{% url 'chat_list' %}">チャット</a></li>
-                    {% if user.user_type == 'responder' %}
-                    <li><a href="{% url 'saved_inquiries' %}">保存した相談</a></li>
-                    {% endif %}
-                    {% if user.user_type == 'inquirer' %}
-                    <li><a href="{% url 'inquiry_create' %}">相談を投稿</a></li>
-                    <li><a href="{% url 'saved_responses' %}">保存した返答</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                        <li><a href="{% url 'profile' user.pk %}">プロフィール</a></li>
+                        <li><a href="{% url 'logout' %}">ログアウト</a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">ログイン</a></li>
-                    <li><a href="{% url 'register' %}">新規登録</a></li>
+                        <li><a href="{% url 'register' %}">新規登録</a></li>
+                        <li><a href="{% url 'login' %}">ログイン</a></li>
                     {% endif %}
                 </ul>
             </nav>
-        </header>
-        <main style="background-image: url('{{ MEDIA_URL }}bagimg/backimg.png');">
+        </div>
+
+        <main class="main-content">
             {% block content %}
             {% endblock %}
         </main>
-        <footer>
-            © 2024 育児のなやみ
-        </footer>
 
+        <!-- PCサイズのみ表示するフッター -->
+        <footer class="footer-menu">
+            <nav>
+                <ul class="footer-nav">
+                    <li><a href="{% url 'home' %}">ホーム</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' user.pk %}">プロフィール</a></li>
+                        <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                    {% else %}
+                        <li><a href="{% url 'register' %}">新規登録</a></li>
+                        <li><a href="{% url 'login' %}">ログイン</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggler = document.getElementById('navbarToggle');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const body = document.body;
+
+            toggler.addEventListener('click', function() {
+                sidebarMenu.classList.toggle('show');
+                body.classList.toggle('sidebar-open');
+            });
+
+            // サイドバー外クリックで閉じる
+            document.addEventListener('click', function(event) {
+                if (!sidebarMenu.contains(event.target) && 
+                    !toggler.contains(event.target) && 
+                    sidebarMenu.classList.contains('show')) {
+                    sidebarMenu.classList.remove('show');
+                    body.classList.remove('sidebar-open');
+                }
+            });
+        });
+    </script>
 </body>
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const toggler = document.getElementById('navbarToggle');
         const sidebarMenu = document.getElementById('sidebarMenu');
@@ -63,5 +107,5 @@
             document.body.classList.toggle('sidebar-open');
         });
     });
-</script>
+</script> -->
 </html>

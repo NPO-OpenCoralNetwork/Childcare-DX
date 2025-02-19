@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block title %}
+  子育て支援情報
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/child_support.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="blog-post-detail">
+    <h1>{{ child_support_info.title }}</h1>
+    <div class="meta">公開日: {{ child_support_info.published_date|date:"Y/m/d" }}</div>
+    {% if child_support_info.description %}
+      <p class="excerpt">{{ child_support_info.description }}</p>
+    {% endif %}
+    <div class="content">
+        {{ child_support_info.content|linebreaks }}
+    </div>
+    <div class="back-link">
+        <a href="{% url 'child_support_list' %}">&larr; 一覧に戻る</a>
+    </div>
+</div>
+{% endblock %}

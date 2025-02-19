@@ -1,0 +1,382 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/allowed_detail.css' %}">
+{% endblock head %}
+{% block title %}
+  認可保育施設詳細情報
+{% endblock title %}
+{% block content %}
+<div class="detail-container">
+  <!-- 施設名称 -->
+  <h1 class="facility-title">{{ facility.facility_name|display_none }}</h1>
+
+  <div class="info-grid">
+    <!-- 基本情報カード -->
+    <div class="info-card">
+      <h2>基本情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">施設名称（ふりがな）</span>
+          <span class="value">{{ facility.facility_name_furigana|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">施設類型</span>
+          <span class="value">{{ facility.facility_type|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">事業所番号</span>
+          <span class="value">{{ facility.jigyousho_number|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">住所</span>
+          <span class="value">
+            〒{{ facility.facility_zipcode|display_none }}<br>
+            {{ facility.facility_address_pref|display_none }}　
+            {{ facility.facility_address_city|display_none }}　
+            {{ facility.facility_address_town|display_none }}　
+            {{ facility.facility_address_building|default_if_none:"" }}
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">電話番号</span>
+          <span class="value">{{ facility.facility_phone|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 法人情報カード -->
+    <div class="info-card">
+      <h2>法人情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">法人種類</span>
+          <span class="value">{{ facility.corporation_type|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">法人名称</span>
+          <span class="value">
+            {{ facility.corporation_name_furigana|display_none }}<br>
+            {{ facility.corporation_name|display_none }}
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">法人住所</span>
+          <span class="value">
+            〒{{ facility.houjin_zipcode|display_none }}<br>
+            {{ facility.houjin_address_pref|display_none }}　
+            {{ facility.houjin_address_city|display_none }}　
+            {{ facility.houjin_address_town|display_none }}　
+            {{ facility.houjin_address_building|default_if_none:"" }}
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">法人連絡先</span>
+          <span class="value">{{ facility.houjin_phone|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">代表者</span>
+          <span class="value">{{ facility.houjin_representative_name|display_none }} ({{ facility.houjin_representative_role|display_none }})</span>
+        </div>
+        <div class="info-item">
+          <span class="label">設立年月日</span>
+          <span class="value">{{ facility.houjin_established_date|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 事業情報カード -->
+    <div class="info-card">
+      <h2>事業情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">認可年月日</span>
+          <span class="value">{{ facility.project_approval_date|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">事業開始日</span>
+          <span class="value">{{ facility.project_start_date|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">確認年月日</span>
+          <span class="value">{{ facility.project_confirmation_date|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">営業状況</span>
+          <span class="value">{{ facility.business_status|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 従業者・職員情報カード -->
+    <div class="info-card">
+      <h2>従業者・職員情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">保育教諭</span>
+          <span class="value">
+            常勤: {{ facility.hoiku_kyoyu_fulltime|display_none }}名<br>
+            非常勤: {{ facility.hoiku_kyoyu_parttime|display_none }}名
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">教諭又は保育士</span>
+          <span class="value">
+            常勤: {{ facility.kyoyu_hoikushi_fulltime|display_none }}名<br>
+            非常勤: {{ facility.kyoyu_hoikushi_parttime|display_none }}名
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">保育士</span>
+          <span class="value">
+            常勤: {{ facility.hoikushi_fulltime|display_none }}名<br>
+            非常勤: {{ facility.hoikushi_parttime|display_none }}名
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">保育従事者合計</span>
+          <span class="value">
+            常勤: {{ facility.hoiku_workers_fulltime|display_none }}名<br>
+            非常勤: {{ facility.hoiku_workers_parttime|display_none }}名
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">看護師</span>
+          <span class="value">
+            常勤: {{ facility.kango_fulltime|display_none }}名<br>
+            非常勤: {{ facility.kango_parttime|display_none }}名
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">家庭的保育者</span>
+          <span class="value">
+            常勤: {{ facility.katei_hoiku_fulltime|display_none }}名<br>
+            非常勤: {{ facility.katei_hoiku_assistant_parttime|display_none }}名
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 開所・預かり保育時間カード -->
+    <div class="info-card">
+      <h2>開所・預かり保育時間</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">開所曜日</span>
+          <span class="value">{{ facility.open_days|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">平日</span>
+          <span class="value">{{ facility.weekday_open|display_none }} - {{ facility.weekday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">土曜日</span>
+          <span class="value">{{ facility.saturday_open|display_none }} - {{ facility.saturday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">日祝日</span>
+          <span class="value">{{ facility.sunday_open|display_none }} - {{ facility.sunday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">延長保育（午前）</span>
+          <span class="value">{{ facility.extended_am_open|display_none }} - {{ facility.extended_am_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">延長保育（午後）</span>
+          <span class="value">{{ facility.extended_pm_open|display_none }} - {{ facility.extended_pm_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">預かり保育（平日）</span>
+          <span class="value">{{ facility.azukari_weekday_open|display_none }} - {{ facility.azukari_weekday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">預かり保育（土曜）</span>
+          <span class="value">{{ facility.azukari_saturday_open|display_none }} - {{ facility.azukari_saturday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">預かり保育（日祝）</span>
+          <span class="value">{{ facility.azukari_sunday_open|display_none }} - {{ facility.azukari_sunday_close|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 利用定員・利用者数カード -->
+    <div class="info-card">
+      <h2>利用定員・利用状況</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">年齢別定員・利用者数</span>
+          <span class="value">
+            0歳: 定員 {{ facility.age0_capacity|display_none }} / 利用者数 {{ facility.age0_users|display_none }} / 学級数 {{ facility.age0_classes|display_none }}<br>
+            1歳: 定員 {{ facility.age1_capacity|display_none }} / 利用者数 {{ facility.age1_users|display_none }} / 学級数 {{ facility.age1_classes|display_none }}<br>
+            2歳: 定員 {{ facility.age2_capacity|display_none }} / 利用者数 {{ facility.age2_users|display_none }} / 学級数 {{ facility.age2_classes|display_none }}<br>
+            3歳: 定員 {{ facility.age3_capacity|display_none }} / 利用者数 {{ facility.age3_users|display_none }} / 学級数 {{ facility.age3_classes|display_none }}<br>
+            4歳: 定員 {{ facility.age4_capacity|display_none }} / 利用者数 {{ facility.age4_users|display_none }} / 学級数 {{ facility.age4_classes|display_none }}<br>
+            5歳: 定員 {{ facility.age5_capacity|display_none }} / 利用者数 {{ facility.age5_users|display_none }} / 学級数 {{ facility.age5_classes|display_none }}<br>
+            合計: 定員 {{ facility.total_capacity|display_none }} / 利用者数 {{ facility.total_users|display_none }} / 学級数 {{ facility.total_classes|display_none }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 運営・保育内容カード -->
+    <div class="info-card">
+      <h2>運営・保育内容</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">運営方法</span>
+          <span class="value">{{ facility.operation_method|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">教育・保育の内容</span>
+          <span class="value">{{ facility.education_content|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 給食・その他サービスカード -->
+    <div class="info-card">
+      <h2>給食・サービス</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">給食状況</span>
+          <span class="value">{{ facility.lunch_status|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">給食提供日</span>
+          <span class="value">{{ facility.lunch_days|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">障害児対応</span>
+          <span class="value">{{ facility.disability_support|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">一時預かり</span>
+          <span class="value">{{ facility.temporary_care|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">病児保育</span>
+          <span class="value">{{ facility.sick_childcare|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 施設面積・利用料関連カード -->
+    <div class="info-card">
+      <h2>施設面積・利用料</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">居室面積</span>
+          <span class="value">{{ facility.room_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">園舎面積</span>
+          <span class="value">{{ facility.building_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">園庭面積</span>
+          <span class="value">{{ facility.yard_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">実費徴収</span>
+          <span class="value">{{ facility.actual_cost_charged|display_none }} ({{ facility.actual_cost_reason|display_none }} / 金額: {{ facility.actual_cost_amount|display_none }})</span>
+        </div>
+        <div class="info-item">
+          <span class="label">上乗せ徴収</span>
+          <span class="value">{{ facility.surcharge_charged|display_none }} ({{ facility.surcharge_reason|display_none }} / 金額: {{ facility.surcharge_amount|display_none }})</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 利用・苦情・対応カード -->
+    <div class="info-card">
+      <h2>利用・苦情・対応</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">利用手続き</span>
+          <span class="value">{{ facility.usage_procedure|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">選考基準</span>
+          <span class="value">{{ facility.selection_criteria|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">苦情窓口</span>
+          <span class="value">{{ facility.complaints_contact|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">賠償対応</span>
+          <span class="value">{{ facility.compensation_policy|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">提供内容の特色</span>
+          <span class="value">{{ facility.service_features|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 説明・同意・評価カード -->
+    <div class="info-card">
+      <h2>説明・同意・評価</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">開始時の説明</span>
+          <span class="value">{{ facility.explanation_at_start|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">利用者の同意</span>
+          <span class="value">{{ facility.user_consent|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">利用料に関する説明</span>
+          <span class="value">{{ facility.fee_explanation|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">苦情対応取組</span>
+          <span class="value">{{ facility.complaint_handling|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">事故防止対策</span>
+          <span class="value">{{ facility.accident_prevention|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">個人情報取組</span>
+          <span class="value">{{ facility.privacy_policy|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">第三者評価</span>
+          <span class="value">{{ facility.third_party_evaluation|display_none }} - {{ facility.third_party_result|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 位置情報カード -->
+    <div class="info-card">
+      <h2>位置情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">所在地</span>
+          <span class="value">
+            〒{{ facility.facility_zipcode|display_none }}<br>
+            {{ facility.facility_address_pref|display_none }}　
+            {{ facility.facility_address_city|display_none }}　
+            {{ facility.facility_address_town|display_none }}　
+            {{ facility.facility_address_building|default_if_none:"" }}
+          </span>
+        </div>
+        <div class="map-container" style="margin-top: 15px;">
+          <iframe
+            width="100%"
+            height="300"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBqtw-c-tq62id9bd8G0eaH75aMv8_fsgQ&q={{ facility.facility_address_pref|urlencode }}+{{ facility.facility_address_city|urlencode }}+{{ facility.facility_address_town|urlencode }}"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

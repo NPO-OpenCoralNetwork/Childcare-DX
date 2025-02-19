@@ -13,36 +13,35 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
-import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-25_y&!1l(ek3w-^bd^ts=64f-=ue-j5oz&@bj9r4o8_l39n#y7'
-
+SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = [ 'forcarer-361965a317c9.herokuapp.com','www.forcarer.org','localhost']
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # # または、特定のオリジンだけを許可する場合
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'https://forcarer-361965a317c9.herokuapp.com',
-    'https://www.forcarer.org'
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8000',
+#     'http://127.0.0.1:8000',
+#     'https://forcarer-361965a317c9.herokuapp.com',
+#     'https://www.forcarer.org'
+# ]
 
-CSRF_TRUSTED_ORIGINS = ['https://forcarer-361965a317c9.herokuapp.com',
-    'https://www.forcarer.org']
+# CSRF_TRUSTED_ORIGINS = ['https://forcarer-361965a317c9.herokuapp.com',
+#     'https://www.forcarer.org']
 
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
@@ -81,13 +80,14 @@ MIDDLEWARE = [
     
 ]
 
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER='www.focarer@gmail.com'
-EMAIL_HOST_PASSWORD='tqyb ekdo hgnf sfyy'
-DEFAULT_FROM_EMAIL = 'no-reply@forcarer.org'
-ROOT_URLCONF = 'childhelper.urls'
+
+
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30日
@@ -153,9 +153,9 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kaigo',
+        'NAME': 'ikuji',
         'USER': 'postgres',
-        'PASSWORD': 'tarakomentaiko1326',
+        'PASSWORD': 'hamberthambert1326',
         'HOST': 'localhost',  
         'PORT': '5432', 
     }
@@ -225,4 +225,3 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())

@@ -73,16 +73,16 @@ class SavedResponseSerializer(serializers.ModelSerializer):
         model = SavedResponse
         fields = '__all__'
 
-from jigyousha.models import SJigyousha, Jigyousha
+from jigyousha.models import disallowed, allowed
 
-class SJigyoushaSerializer(serializers.ModelSerializer):
+class disallowedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SJigyousha
+        model = disallowed
         fields = '__all__'
 
-class JigyoushaSerializer(serializers.ModelSerializer):
+class allowedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Jigyousha
+        model = allowed
         fields = '__all__'
 
 from chat.models import Message

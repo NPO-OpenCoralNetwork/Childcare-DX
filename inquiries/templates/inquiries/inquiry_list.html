@@ -1,81 +1,128 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-  相談リスト
+相談リスト
 {% endblock title %}
 {% block head %}
-  <link rel="stylesheet" href="{% static 'css/inquiry_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/inquiry_list.css' %}">
 {% endblock head %}
 
 {% block content %}
 <div class="inquiry-list-container">
     <h2>相談一覧</h2>
-
-    <!-- 統合された検索フォーム -->
-
-        <div class="tags-container">
-            {% for tag in tags %}
-                <label for="{{ tag.id }}" class="{% if tag.id|stringformat:"s" in selected_tags %}selected{% endif %}">
-                    {{ tag.name }}
-                </label>
+    <div class="home-container" id="new_inquiries">
+        <h2>新しい相談</h2>
+        <ul class="inquiry-list">
+            {% for inquiry in new_inquiries %}
+            <li class="inquiry-item">
+                <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }} - {{
+                    inquiry.created_at }}</a>
+            </li>
             {% endfor %}
-        </div>
+        </ul>
 
-        <!-- 選択されたタグIDを保持するhidden input -->
-        <div id="hidden-inputs"></div>
-        <form method="get" action="{% url 'inquiry_list' %}" class="search-form">
-            <input type="text" name="q" placeholder="検索ワード" value="{{ query }}" class="search-input">
-            <button type="submit" class="search-button">検索</button>
+        <div class="pagination">
+            <span class="step-links">
+                {% if new_inquiries.has_previous %}
+                <a href="?page_new={{ new_inquiries.previous_page_number }}#new_inquiries">&laquo; 前へ</a>
+                {% endif %}
+                <span class="current">
+                    ページ {{ new_inquiries.number }} / {{ new_inquiries.paginator.num_pages }}
+                </span>
+                {% if new_inquiries.has_next %}
+                <a href="?page_new={{ new_inquiries.next_page_number }}#new_inquiries">次へ &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <div class="home-container" id="popular_inquiries">
+        <h2>色々な相談</h2>
+        <ul class="inquiry-list">
+            {% for inquiry in popular_inquiries %}
+            <li class="inquiry-item">
+                <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if popular_inquiries.has_previous %}
+                <a href="?page_popular={{ popular_inquiries.previous_page_number }}#popular_inquiries">&laquo; 前へ</a>
+                {% endif %}
+                <span class="current">
+                    ページ {{ popular_inquiries.number }} / {{ popular_inquiries.paginator.num_pages }}
+                </span>
+                {% if popular_inquiries.has_next %}
+                <a href="?page_popular={{ popular_inquiries.next_page_number }}#popular_inquiries">次へ &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+    <div class="tags-container">
+        {% for tag in tags %}
+        <label for="{{ tag.id }}" class="{% if tag.id|stringformat:" s" in selected_tags %}selected{% endif %}">
+            {{ tag.name }}
+        </label>
+        {% endfor %}
+    </div>
+
+    <!-- 選択されたタグIDを保持するhidden input -->
+    <div id="hidden-inputs"></div>
+    <form method="get" action="{% url 'inquiry_list' %}" class="search-form">
+        <input type="text" name="q" placeholder="検索ワード" value="{{ query }}" class="search-input">
+        <button type="submit" class="search-button">検索</button>
     </form>
 
     <!-- 検索結果表示 -->
     {% if inquiries %}
-        <ul class="inquiry-list">
-            {% for inquiry in inquiries %}
-                <li class="inquiry-item">
-                    <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a>
-                    <span>{{ inquiry.created_at }}</span>
-                </li>
-            {% endfor %}
-        </ul>
+    <ul class="inquiry-list">
+        {% for inquiry in inquiries %}
+        <li class="inquiry-item">
+            <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a>
+            <span>{{ inquiry.created_at }}</span>
+        </li>
+        {% endfor %}
+    </ul>
 
-        <!-- ページネーション -->
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?{% if query %}q={{ query }}&{% endif %}
+    <!-- ページネーション -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}
                               {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
                               page=1">&laquo; 最初</a>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}
                               {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
                               page={{ page_obj.previous_page_number }}">&lsaquo; 前</a>
-                {% endif %}
+            {% endif %}
 
-                <span class="current">
-                    {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-                </span>
+            <span class="current">
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
 
-                {% if page_obj.has_next %}
-                    <a href="?{% if query %}q={{ query }}&{% endif %}
+            {% if page_obj.has_next %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}
                               {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
                               page={{ page_obj.next_page_number }}">次 &rsaquo;</a>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}
+            <a href="?{% if query %}q={{ query }}&{% endif %}
                               {% for tag in selected_tags %}tags={{ tag }}&{% endfor %}
                               page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+            {% endif %}
+        </span>
+    </div>
     {% else %}
-        <p class="no-inquiry">該当する相談がありません。</p>
+    <p class="no-inquiry">該当する相談がありません。</p>
     {% endif %}
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const tags = document.querySelectorAll('.tags-container label');
 
         tags.forEach(tag => {
-            tag.addEventListener('click', function() {
+            tag.addEventListener('click', function () {
                 this.classList.toggle('selected');
                 updateHiddenInput();
             });

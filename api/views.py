@@ -204,16 +204,16 @@ class SavedResponseListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return Response.objects.filter(user=self.request.user)
 
-from .serializers import SJigyoushaSerializer, JigyoushaSerializer
-from jigyousha.models import SJigyousha,Jigyousha
+from .serializers import disallowedSerializer, allowedSerializer
+from jigyousha.models import disallowed,allowed
 from django.db.models import Q
 
-class SJigyoushaListAPIView(generics.ListAPIView):
-    serializer_class = SJigyoushaSerializer
+class disallowedListAPIView(generics.ListAPIView):
+    serializer_class = disallowedSerializer
     permission_classes = [IsAuthenticated]  # 認証が必要であれば追加
     
     def get_queryset(self):
-        queryset = SJigyousha.objects.all()
+        queryset = disallowed.objects.all()
         todofuken = self.request.query_params.get('todofuken', None)
         shichoson = self.request.query_params.get('shichoson', None)
         service_types = self.request.query_params.getlist('service_types', None)
@@ -267,12 +267,12 @@ class SJigyoushaListAPIView(generics.ListAPIView):
         return queryset
 
 
-class JigyoushaListAPIView(generics.ListAPIView):
-    serializer_class = JigyoushaSerializer
+class allowedListAPIView(generics.ListAPIView):
+    serializer_class = allowedSerializer
     permission_classes = [IsAuthenticated]  # 認証が必要であれば追加
     
     def get_queryset(self):
-        queryset = Jigyousha.objects.all()
+        queryset = allowed.objects.all()
         todofuken = self.request.query_params.get('todofuken', None)
         shichoson = self.request.query_params.get('shichoson', None)
         service_types = self.request.query_params.getlist('service_types', None)

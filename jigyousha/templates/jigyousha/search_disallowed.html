@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search_jigyousha.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{% endblock head %}
+{% block title %}
+  認可外保育施設検索
+{% endblock title %}
+{% block content %}
+<div class="page-wrapper">
+  <div class="search-container">
+      <h2>認可外保育施設検索</h2>
+
+      <form method="GET" action="{% url 'search_allowed' %}" class="search-form">
+          <div class="form-group">
+              <label for="todofuken">都道府県:</label>
+              <select name="todofuken" id="todofuken" required class="form-control" size="-2">
+                  <option value="">選択してください</option>
+                  {% for todofuken in todofuken_list %}
+                      <option value="{{ todofuken }}" {% if todofuken == selected_todofuken %}selected{% endif %}>
+                          {{ todofuken }}
+                      </option>
+                  {% endfor %}
+              </select>
+          </div>
+
+          <div class="form-group">
+              <label for="shichoson">市町村:</label>
+              <select name="shichoson" id="shichoson" class="form-control">
+                  <option value="">選択してください</option>
+                  {% for shichoson in shichoson_list %}
+                      <option value="{{ shichoson }}" {% if shichoson == selected_shichoson %}selected{% endif %}>
+                          {{ shichoson }}
+                      </option>
+                  {% endfor %}
+              </select>
+          </div>
+
+          <!-- キーワード検索 -->
+          <div class="form-group">
+              <label for="keyword">キーワード:</label>
+              <input type="text" name="keyword" placeholder="サービスの種類で検索..." class="form-control search-input">
+          </div>
+
+          <button type="submit" class="search-button">検索</button>
+      </form>
+  </div>
+  <div class="table-container">
+      {% if results.exists %}
+      <div class="result-cards">
+          {% for facility in page_obj %}
+          <div class="card">
+              <div class="card-header">
+                  <h3>{{ facility.facility_office_name }}</h3>
+              </div>
+              <div class="card-body">
+                  <p><strong>サービス種類:</strong> {{ facility.facility_type }}</p>
+                  <p><strong>住所:</strong>
+                      {{ facility.address_pref }} {{ facility.address_city }} {{ facility.address_street }}
+                  </p>
+                  <p><strong>電話番号:</strong> {{ facility.phone }}</p>
+                  <a href="{% url 'disallowed_detail' facility.id %}" class="btn btn-primary">詳細を見る</a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+      
+      {% else %}
+          {% if request.GET %}
+              <p>該当する事業所が見つかりません。</p>
+          {% endif %}
+      {% endif %}
+
+      <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">最初</a>
+                  <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">前へ</a>
+              {% endif %}
+
+              <span class="current">
+                  ページ {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+              </span>
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">次へ</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">最後</a>
+              {% endif %}
+          </span>
+      </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#todofuken').change(function() {
+            const todofuken = $(this).val();
+            const $shichosonSelect = $('#shichoson');
+            $shichosonSelect.html('<option value="">選択してください</option>');
+
+            if (todofuken) {
+                const url = "{% url 'get_shichoson' %}?todofuken=" + encodeURIComponent(todofuken);
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, shichoson) {
+                            const option = $('<option></option>').val(shichoson).text(shichoson);
+                            $shichosonSelect.append(option);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('There was a problem with the fetch operation:', error);
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    $('#todofuken').select2({
+        minimumResultsForSearch: Infinity, 
+        dropdownCssClass: "custom-dropdown",
+        maximumSelectionLength: 5, 
+    });
+
+    $('#shichoson').select2({
+        minimumResultsForSearch: Infinity,
+        dropdownCssClass: "custom-dropdown",
+        maximumSelectionLength: 5,
+    });
+});
+</script>
+{% endblock %}

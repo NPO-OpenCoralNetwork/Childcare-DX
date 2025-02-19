@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/allowed_detail.css' %}">
+{% endblock head %}
+{% block title %}
+  認可保育施設検索 - 詳細情報
+{% endblock title %}
+{% block content %}
+<div class="detail-container">
+  <!-- 施設名称 -->
+  <h1 class="facility-title">{{ facility.facility_office_name|display_none }}</h1>
+  
+  <div class="info-grid">
+    <!-- 基本情報カード -->
+    <div class="info-card">
+      <h2>基本情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">施設名称</span>
+          <span class="value">{{ facility.facility_office_name|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">施設類型</span>
+          <span class="value">{{ facility.facility_type|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">郵便番号</span>
+          <span class="value">〒{{ facility.zipcode|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">住所</span>
+          <span class="value">
+            {{ facility.address_pref|display_none }}　
+            {{ facility.address_city|display_none }}　
+            {{ facility.address_street|display_none }}　
+            {{ facility.address_building|default_if_none:"" }}
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">電話番号</span>
+          <span class="value">{{ facility.phone|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 交通情報カード -->
+    <div class="info-card">
+      <h2>交通情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">最寄り駅</span>
+          <span class="value">{{ facility.access_train_line|display_none }} {{ facility.access_train_station|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">バス</span>
+          <span class="value">{{ facility.access_bus|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">徒歩</span>
+          <span class="value">{{ facility.access_walk|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 法人情報カード -->
+    <div class="info-card">
+      <h2>法人情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">法人種類</span>
+          <span class="value">{{ facility.corporation_type|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">法人名称</span>
+          <span class="value">{{ facility.corporation_name|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">管理者</span>
+          <span class="value">{{ facility.manager|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 営業情報カード -->
+    <div class="info-card">
+      <h2>営業情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">営業状況</span>
+          <span class="value">{{ facility.business_status|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">届け出受理日</span>
+          <span class="value">{{ facility.notification_date|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">事業開始日</span>
+          <span class="value">{{ facility.project_start_date|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">証明書交付日</span>
+          <span class="value">{{ facility.certificate_date|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 建物情報カード -->
+    <div class="info-card">
+      <h2>建物情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">建物構造</span>
+          <span class="value">{{ facility.building_structure|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">階層</span>
+          <span class="value">{{ facility.building_structure_floor|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">建物形態</span>
+          <span class="value">{{ facility.building_form|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">合計面積</span>
+          <span class="value">{{ facility.total_area|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 部屋情報カード -->
+    <div class="info-card">
+      <h2>部屋情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">保育室</span>
+          <span class="value">部屋数: {{ facility.hoikusitsu_rooms|display_none }} / 面積: {{ facility.hoikusitsu_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">調理室</span>
+          <span class="value">部屋数: {{ facility.kitchen_rooms|display_none }} / 面積: {{ facility.kitchen_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">医務室</span>
+          <span class="value">部屋数: {{ facility.medical_rooms|display_none }} / 面積: {{ facility.medical_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">便所</span>
+          <span class="value">部屋数: {{ facility.toilet_rooms|display_none }} / 面積: {{ facility.toilet_area|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">その他</span>
+          <span class="value">部屋数: {{ facility.other_rooms|display_none }} / 面積: {{ facility.other_area|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 利用定員カード -->
+    <div class="info-card">
+      <h2>利用定員</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">合計利用定員数</span>
+          <span class="value">{{ facility.total_capacity|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">合計利用児童数</span>
+          <span class="value">{{ facility.total_users|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 開所時間カード -->
+    <div class="info-card">
+      <h2>開所時間</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">平日</span>
+          <span class="value">{{ facility.weekday_open|display_none }} - {{ facility.weekday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">土曜日</span>
+          <span class="value">{{ facility.saturday_open|display_none }} - {{ facility.saturday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">日祝日</span>
+          <span class="value">{{ facility.sunday_open|display_none }} - {{ facility.sunday_close|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">延長保育</span>
+          <span class="value">{{ facility.extended_hoiku_time|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 職員情報カード -->
+    <div class="info-card">
+      <h2>職員情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">保育従事者数</span>
+          <span class="value">常勤: {{ facility.hoiku_workers_fulltime|display_none }}名<br>
+          非常勤: {{ facility.hoiku_workers_parttime|display_none }}名</span>
+        </div>
+        <div class="info-item">
+          <span class="label">保育士（有資格者）</span>
+          <span class="value">{{ facility.qualified_hoikusha|display_none }}名</span>
+        </div>
+        <div class="info-item">
+          <span class="label">看護師</span>
+          <span class="value">{{ facility.qualified_nurse|display_none }}名</span>
+        </div>
+        <div class="info-item">
+          <span class="label">家庭的保育者等</span>
+          <span class="value">{{ facility.qualified_kateiteki|display_none }}名</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 研修情報カード -->
+    <div class="info-card">
+      <h2>研修情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">居宅訪問型保育研修</span>
+          <span class="value">{{ facility.training_visit_care|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">子育て支援員研修</span>
+          <span class="value">{{ facility.training_child_support|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">家庭的保育者研修</span>
+          <span class="value">{{ facility.training_family_care|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">その他研修</span>
+          <span class="value">{{ facility.training_other|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公表情報カード -->
+    <div class="info-card">
+      <h2>公表情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">認可外保育施設（無償化対象）</span>
+          <span class="value">{{ facility.publication_unlicensed_status|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">企業主導型保育施設</span>
+          <span class="value">{{ facility.publication_corporate_status|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">特定子ども・子育て支援施設</span>
+          <span class="value">{{ facility.publication_tokutei_status|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">ホームページ</span>
+          <span class="value">{{ facility.publication_homepage|display_none }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">更新日</span>
+          <span class="value">{{ facility.publication_update_date|display_none }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 位置情報カード（Google マップ埋め込み） -->
+    <div class="info-card">
+      <h2>位置情報</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <span class="label">所在地</span>
+          <span class="value">
+            〒{{ facility.zipcode|display_none }}<br>
+            {{ facility.address_pref|display_none }}
+            {{ facility.address_city|display_none }}
+            {{ facility.address_street|display_none }}
+          </span>
+        </div>
+        <div class="map-container" style="margin-top: 15px;">
+          <iframe
+            width="100%"
+            height="300"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBqtw-c-tq62id9bd8G0eaH75aMv8_fsgQ&q={{ facility.address_pref|urlencode }}+{{ facility.address_city|urlencode }}+{{ facility.address_street|urlencode }}"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

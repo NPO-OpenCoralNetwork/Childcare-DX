@@ -4,36 +4,80 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block content %}
-<div class="home-container">
 
-    <!-- お知らせ枠 -->
-    <h2>お知らせ</h2>
-    <ul class="announcement-list" id="announcements" >
-        {% for announcement in announcements %}
-        <li class="announcement-item">        
-            <a href="{% url 'announcement_detail' announcement.pk %}" class="announcement-link">
-            {{ announcement.title }} - {{ announcement.date }}
-        </a></li>
-        {% endfor %}
-    </ul>
-
-    <div class="pagination">
-        <span class="step-links">
-        {% if announcements.has_previous %}
-            <a href="?page_announcement={{ announcements.previous_page_number }}#announcements">&laquo; 前へ</a>
-        {% endif %}
-        <span class="current">
-            ページ {{ announcements.number }} / {{ announcements.paginator.num_pages }}
-        </span>
-        {% if announcements.has_next %}
-            <a href="?page_announcement={{ announcements.next_page_number }}#announcements">次へ &raquo;</a>
-        {% endif %}
-        </span>
+    <section class="intro">
+        <h2>みんなで支える、子育ての輪</h2>
+        <p>地域の子育て支援情報から施設検索、連絡帳まで。子育てに必要な機能が全て揃った総合プラットフォーム</p>
+    </section>
+    <div class="features">
+        <a href="{% url 'search_allowed' %}" class="feature-card">
+            <div class="icon">📍</div>
+            <h3>認可保育施設検索</h3>
+            <p>近くの認可保育施設や子育て支援施設を簡単に探せます</p>
+        </a>
+    
+        <a href="{% url 'search_disallowed' %}" class="feature-card">
+            <div class="icon">🚩</div>
+            <h3>認可外保育施設検索</h3>
+            <p>近くの認可外保育施設や子育て支援施設を簡単に探せます</p>
+        </a>
+    
+        <a href="{% url 'inquiry_list' %}" class="feature-card">
+            <div class="icon">🎧</div>
+            <h3>相談一覧</h3>
+            <p>子育てに関するみんなの悩みを見てみましょう</p>
+        </a>
+    {% if user.is_authenticated and user.user_type == 'inquirer' %}
+        <a href="{% url 'inquiry_create' %}" class="feature-card">
+            <div class="icon">📪</div>
+            <h3>相談を投稿</h3>
+            <p>子育てに関する悩みを相談してみましょう</p>
+        </a>
+        <a href="{% url 'chat_list' %}" class="feature-card">
+            <div class="icon">💬</div>
+            <h3>チャット</h3>
+            <p>信頼できる相談相手と話しましょう</p>
+        </a>
+    {% endif %}
+        <a href="{% url 'child_support_list' %}" class="feature-card">
+            <div class="icon">📺</div>
+            <h3>子育て支援情報</h3>
+            <p>子育てに関する情報をみてみましょう</p>
+        </a>
     </div>
-</div>
+ 
+    
+    <div class="home-container">
+        <h2>お知らせ</h2>
+        <ul class="announcement-list">
+            {% for announcement in announcements %}
+            <li class="announcement-item">
+                <a href="{% url 'announcement_detail' announcement.pk %}" class="announcement-link">
+                    {{ announcement.title }} - {{ announcement.date }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            <span class="step-links">
+            {% if announcements.has_previous %}
+                <a href="?page_announcement={{ announcements.previous_page_number }}#announcements">&laquo; 前へ</a>
+            {% endif %}
+            <span class="current">
+                ページ {{ announcements.number }} / {{ announcements.paginator.num_pages }}
+            </span>
+            {% if announcements.has_next %}
+                <a href="?page_announcement={{ announcements.next_page_number }}#announcements">次へ &raquo;</a>
+            {% endif %}
+            </span>
+        </div>
+    </div>
+
+
+
 
 <div class="home-container" id="new_inquiries">
-    <h2>新しい相談</h2>
+    <h2>新着の相談</h2>
     <ul class="inquiry-list">
         {% for inquiry in new_inquiries %}
         <li class="inquiry-item">
@@ -58,7 +102,7 @@
 </div>
 
 <div class="home-container" id="popular_inquiries">
-    <h2>色々な相談</h2>
+    <h2>新着の子育て支援情報</h2>
     <ul class="inquiry-list">
         {% for inquiry in popular_inquiries %}
         <li class="inquiry-item">
@@ -81,6 +125,7 @@
         </span>
     </div>
 </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
