@@ -1,0 +1,211 @@
+:root {
+    --primary-color: #c0d26e;      /* 以前の #d2e479 より少し深みを持たせた柔らかい黄緑 */
+    --secondary-color: #5a4e7c;    /* 以前の #797a94 よりも濃く、補色に近い引き締まった紫 */
+    --background-color: #FFF6EC;   /* 背景色はそのまま */
+    --text-color: #333;            /* テキストカラーはそのまま */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ===== 全体設定 ===== */
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ===== ページラッパー ===== */
+  .page-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  /* ===== 検索コンテナ ===== */
+  .search-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .search-container h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  /* ===== 検索フォーム ===== */
+  .search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: rgba(192, 210, 110, 0.35); /* --primary-color の透明度を調整 */
+    border: 1px solid rgba(192, 210, 110, 0.7);
+    border-radius: 8px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+  }
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(192, 210, 110, 0.7);
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .search-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    align-self: center;
+  }
+  .search-button:hover {
+    /* hover時は少し暗めに */
+    background-color: #a9c15e;
+  }
+  
+  /* ===== 結果一覧（カード表示） ===== */
+  .table-container {
+    margin-top: 30px;
+  }
+  .result-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .card {
+    width: 280px;
+    background: #fff;
+    border: 1px solid #d3d7de;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  }
+  .card-header {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 12px 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .card-body {
+    padding: 15px;
+  }
+  .card-body p {
+    margin: 8px 0;
+    line-height: 1.5;
+  }
+  .card-body p strong {
+    color: var(--primary-color);
+  }
+  .btn.btn-primary {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .btn.btn-primary:hover {
+    background-color: #a9c15e;
+  }
+  
+  /* ===== ページネーション ===== */
+  .pagination {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .pagination .step-links a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .pagination .step-links a:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  .pagination .current {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+  }
+  
+  /* ===== Select2 のカスタマイズ ===== */
+  .select2-container .select2-selection--single {
+    height: 38px;
+    padding: 5px 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px;
+    color: var(--text-color);
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+  }
+  
+  /* ===== レスポンシブ対応 ===== */
+  @media (max-width: 768px) {
+    .search-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .form-group {
+      width: 100%;
+    }
+    .search-button {
+      width: 100%;
+    }
+    .result-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

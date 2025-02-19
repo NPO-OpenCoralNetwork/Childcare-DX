@@ -1,0 +1,29 @@
+.announcement-detail-container {
+    background-color: #FFF6EC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.announcement-title {
+    color: #797a94;
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.announcement-date {
+    color: #d2e479;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.announcement-content {
+    color: #797a94;
+    font-size: 1.1em;
+    line-height: 1.6em;
+    white-space: pre-wrap; /* 改行を保持 */
+}
