@@ -44,4 +44,4 @@ django-cloudinary-storage
 stripe
 python-dotenv
 gunicorn
-
+psycopg2-binary
