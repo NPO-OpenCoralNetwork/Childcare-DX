@@ -43,4 +43,5 @@ cloudinary
 django-cloudinary-storage
 stripe
 python-dotenv
+guicorn
 
