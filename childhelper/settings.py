@@ -34,10 +34,10 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # # または、特定のオリジンだけを許可する場合
 CORS_ALLOWED_ORIGINS = [
-    'hoikuapp-7e0adfa07d71.herokuapp.com',
+    'https://hoikuapp-7e0adfa07d71.herokuapp.com',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['hoikuapp-7e0adfa07d71.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://hoikuapp-7e0adfa07d71.herokuapp.com']
 
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
