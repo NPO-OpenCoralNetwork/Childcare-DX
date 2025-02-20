@@ -33,15 +33,11 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # # または、特定のオリジンだけを許可する場合
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://127.0.0.1:8000',
-#     'https://forcarer-361965a317c9.herokuapp.com',
-#     'https://www.forcarer.org'
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'hoikuapp-7e0adfa07d71.herokuapp.com',
+]
 
-# CSRF_TRUSTED_ORIGINS = ['https://forcarer-361965a317c9.herokuapp.com',
-#     'https://www.forcarer.org']
+CSRF_TRUSTED_ORIGINS = ['hoikuapp-7e0adfa07d71.herokuapp.com']
 
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
