@@ -19,7 +19,7 @@ class UserProfile(AbstractUser):
     response_history = models.TextField(blank=True, null=True)
     chat_history = models.TextField(blank=True, null=True)
     if not childhelper.settings.DEBUG:
-        profile_image = CloudinaryField('image',default='default_images/icon_cap.jpg')
+        profile_image = CloudinaryField('image',default='default_images/icon_kap_aptfdl')
     else:
         profile_image = models.ImageField(default='default_images/icon_cap.jpg')
     
