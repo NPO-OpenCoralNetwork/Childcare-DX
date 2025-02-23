@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from chat.models import Chat
 from inquiries.models import Inquiry
 from accounts.models import UserProfile
@@ -7,6 +8,8 @@ from .models import Announcement
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ChildSupportInfo
+from django.views.generic import FormView, TemplateView
+from .forms import ContactForm
 
 def home_view(request):
 
@@ -71,3 +74,21 @@ def child_support_list(request):
 def child_support_detail(request, pk):
     child_support_info = get_object_or_404(ChildSupportInfo, pk=pk)
     return render(request, 'main/child_support_detail.html', {'child_support_info': child_support_info})
+
+class ContactFormView(FormView):
+    template_name = 'myapp/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('app:contact_result')
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
+
+
+class ContactResultView(TemplateView):
+    template_name = 'myapp/contact_result.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['success'] = _("The message has been sent successfully")
+        return context
