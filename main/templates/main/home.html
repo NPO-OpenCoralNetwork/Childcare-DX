@@ -33,12 +33,13 @@
             <h3>相談を投稿</h3>
             <p>子育てに関する悩みを相談してみましょう</p>
         </a>
+    {% endif %}
         <a href="{% url 'chat_list' %}" class="feature-card">
             <div class="icon">💬</div>
             <h3>チャット</h3>
             <p>信頼できる相談相手と話しましょう</p>
         </a>
-    {% endif %}
+
         <a href="{% url 'child_support_list' %}" class="feature-card">
             <div class="icon">📺</div>
             <h3>子育て支援情報</h3>
