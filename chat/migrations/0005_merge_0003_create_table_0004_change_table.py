@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-     
+        ('chat', '0003_create_table'),
         ('chat', '0004_change_table'),
     ]
 
