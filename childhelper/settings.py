@@ -145,10 +145,15 @@ import dj_database_url
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
-        'CONFIG': dj_database_url.parse(os.environ.get('DATABASE_URL')),
+        'CONFIG': {
+            'NAME': os.getenv('DB_NAME', 'postgres'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+        },
     },
 }
-
 DATABASES = {
     'default': 
         dj_database_url.config(default=os.getenv('DATABASE_URL'))
