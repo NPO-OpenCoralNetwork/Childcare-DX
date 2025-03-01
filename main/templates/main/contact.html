@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}お問い合わせ{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <h1>お問い合わせ</h1>
+    <div class="form-wrapper">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">送信</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -19,10 +19,10 @@ def home_view(request):
     new_inquiries_page = paginator_new.get_page(page_number_new)
     
     # 閲覧数の多い相談
-    popular_inquiries = Inquiry.objects.all().order_by('-views')
-    paginator_popular = Paginator(popular_inquiries, 5)
-    page_number_popular = request.GET.get('page_popular')
-    popular_inquiries_page = paginator_popular.get_page(page_number_popular)
+    new_info = ChildSupportInfo.objects.all().order_by('-published_date')
+    paginator_info = Paginator(new_info, 5)
+    page_number_info = request.GET.get('page_info')
+    new_info_page = paginator_info.get_page(page_number_info)
 
     # お知らせ
     announcements = Announcement.objects.all().order_by('-date')
@@ -32,7 +32,7 @@ def home_view(request):
 
     context = {
         'new_inquiries': new_inquiries_page,
-        'popular_inquiries': popular_inquiries_page,
+        'new_info': new_info_page,
         'announcements': announcements_page,
     }
     return render(request, 'main/home.html', context)
@@ -76,9 +76,9 @@ def child_support_detail(request, pk):
     return render(request, 'main/child_support_detail.html', {'child_support_info': child_support_info})
 
 class ContactFormView(FormView):
-    template_name = 'myapp/contact.html'
+    template_name = 'main/contact.html'
     form_class = ContactForm
-    success_url = reverse_lazy('app:contact_result')
+    success_url = reverse_lazy('contact_result')
 
     def form_valid(self, form):
         form.send_email()
@@ -86,9 +86,9 @@ class ContactFormView(FormView):
 
 
 class ContactResultView(TemplateView):
-    template_name = 'myapp/contact_result.html'
+    template_name = 'main/contact_result.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['success'] = _("The message has been sent successfully")
+        context['success'] = ("メッセージが送信されました。")
         return context

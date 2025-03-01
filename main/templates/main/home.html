@@ -105,9 +105,9 @@
 <div class="home-container" id="popular_inquiries">
     <h2>新着の子育て支援情報</h2>
     <ul class="inquiry-list">
-        {% for inquiry in popular_inquiries %}
+        {% for info in new_info %}
         <li class="inquiry-item">
-            <a href="{% url 'inquiry_detail' inquiry.pk %}" class="inquiry-link">{{ inquiry.title }}</a> 
+            <a href="{% url 'child_support_detail' info.pk %}" class="inquiry-link">{{ info.title }}</a> 
         </li>
         {% endfor %}
     </ul>
