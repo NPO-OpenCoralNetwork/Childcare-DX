@@ -139,7 +139,7 @@ STRIPE_SECRET_KEY = 'your_secret_key_here'
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 
 WSGI_APPLICATION = 'childhelper.wsgi.application'
-
+ASGI_APPLICATION = 'childhelper.asgi.application'
 SITE_ID = 1
 import dj_database_url
 CHANNEL_LAYERS = {
