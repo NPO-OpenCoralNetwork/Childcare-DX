@@ -23,56 +23,107 @@
         {% endfor %}
     </div>
 
-    <form id="chat-message-input">
-        <input id="message" type="text">
+    <form id="chat-message-input" onsubmit="return false;">
+        <input id="message" type="text" placeholder="メッセージを入力...">
         <input id="send" type="button" value="↑">
     </form>
 </div>
 
 <script>
     const roomName = "{{ chat.id }}";
-    const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+    let chatSocket = new WebSocket(
+        (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + 
+        window.location.host + 
+        '/ws/chat/' + 
+        roomName + 
+        '/'
     );
 
+    // WebSocket接続の監視とデバッグ
+    chatSocket.onopen = function(e) {
+        console.log('WebSocket connection established');
+    };
+
+    chatSocket.onerror = function(e) {
+        console.error('WebSocket error:', e);
+    };
+
     chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        if (data.sender === "{{ user.username }}") {
-            messageElement.classList.add('sent');
-        } else {
-            messageElement.classList.add('received');
+        try {
+            const data = JSON.parse(e.data);
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            if (data.sender === "{{ user.username }}") {
+                messageElement.classList.add('sent');
+            } else {
+                messageElement.classList.add('received');
+            }
+            messageElement.innerHTML = `
+                <div class="message-content">
+                    <strong>${data.sender}:</strong><br> 
+                    ${data.message} 
+                    <small>${data.timestamp}</small>
+                </div>`;
+            document.querySelector('#chat-log').appendChild(messageElement);
+            scrollToBottom();
+        } catch (error) {
+            console.error('Error processing message:', error);
         }
-        messageElement.innerHTML = `
-            <div class="message-content">
-                <strong>${data.sender}:</strong><br> ${data.message} 
-                <small>${data.timestamp}</small>
-            </div>`;
-        document.querySelector('#chat-log').appendChild(messageElement);
-        scrollToBottom();  // 新しいメッセージを追加した後にスクロール
     };
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
+        // 再接続を試みる
+        setTimeout(function() {
+            console.log('Attempting to reconnect...');
+            chatSocket = new WebSocket(
+                (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + 
+                window.location.host + 
+                '/ws/chat/' + 
+                roomName + 
+                '/'
+            );
+        }, 3000);
     };
 
+    // メッセージ送信処理
     document.querySelector('#send').onclick = function(e) {
         const messageInputDom = document.querySelector('#message');
-        const message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-        messageInputDom.value = '';
+        const message = messageInputDom.value.trim();
+        if (message && chatSocket.readyState === WebSocket.OPEN) {
+            try {
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+                messageInputDom.value = '';
+            } catch (error) {
+                console.error('Error sending message:', error);
+            }
+        }
     };
 
-    function scrollToLatestMessage() {
-        const latestMessage = document.querySelector('.message:last-child');
-        if (latestMessage) {
-            latestMessage.scrollIntoView({ behavior: 'smooth' });
+    // Enterキーでの送信
+    document.querySelector('#message').onkeypress = function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.querySelector('#send').click();
         }
+    };
+
+    // スクロール機能
+    function scrollToBottom() {
+        const chatLog = document.querySelector('#chat-log');
+        chatLog.scrollTop = chatLog.scrollHeight;
     }
-    // ページロード時にチャットフォームの位置にスクロール
-    window.onload = scrollToLatestMessage;
+
+    // ページロード時のスクロール
+    window.onload = scrollToBottom;
+
+    // WebSocket接続の定期的なチェック
+    setInterval(function() {
+        if (chatSocket.readyState !== WebSocket.OPEN) {
+            console.log('Checking WebSocket connection...');
+        }
+    }, 5000);
 </script>
 {% endblock %}
