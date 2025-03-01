@@ -1,36 +1,71 @@
 import json
+import logging
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import Chat, Message
-from django.utils import timezone  # タイムスタンプ用
-import logging
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         try:
-            # 早期にacceptを実行
-            await self.accept()
-            
             self.room_name = self.scope['url_route']['kwargs']['room_name']
             self.room_group_name = f'chat_{self.room_name}'
 
+            # ユーザー認証チェック
             if self.scope["user"].is_anonymous:
                 logger.warning("Anonymous user connection rejected")
+                return False
+
+            # 接続を受け入れる
+            await self.accept()
+            
+            try:
+                # グループへの追加を試みる（タイムアウト付き）
+                from asyncio import wait_for
+                await wait_for(
+                    self.channel_layer.group_add(
+                        self.room_group_name,
+                        self.channel_name
+                    ),
+                    timeout=5.0
+                )
+                logger.info(f"Successfully joined group: {self.room_group_name}")
+            except Exception as group_error:
+                logger.error(f"Group add error: {str(group_error)}")
                 await self.close()
                 return
 
-            # グループへの追加を試みる
-            await self.channel_layer.group_add(
-                self.room_group_name,
-                self.channel_name
-            )
-            
             logger.info(f"WebSocket connected: {self.room_group_name}")
 
         except Exception as e:
             logger.error(f"Connection error: {str(e)}", exc_info=True)
             await self.close()
+
+    async def disconnect(self, close_code):
+        try:
+            # グループから削除
+            if hasattr(self, 'room_group_name'):
+                await self.channel_layer.group_discard(
+                    self.room_group_name,
+                    self.channel_name
+                )
+            logger.info(f"WebSocket disconnected: {getattr(self, 'room_group_name', 'unknown')}")
+        except Exception as e:
+            logger.error(f"Disconnect error: {str(e)}")
+
+    @database_sync_to_async
+    def get_chat(self):
+        return Chat.objects.get(id=self.room_name)
+
+    @database_sync_to_async
+    def save_message(self, chat, user, message_text):
+        return Message.objects.create(
+            chat=chat,
+            sender=user,
+            text=message_text
+        )
 
     async def receive(self, text_data):
         try:
@@ -38,7 +73,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             message = text_data_json['message']
             timestamp = timezone.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            if not message.strip():  # 空メッセージのチェック
+            if not message.strip():
                 return
 
             chat = await self.get_chat()
@@ -57,4 +92,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
 
         except Exception as e:
-            print(f"Message handling error: {str(e)}")  # デバッグ用
+            logger.error(f"Message handling error: {str(e)}", exc_info=True)
+
+    async def chat_message(self, event):
+        try:
+            await self.send(text_data=json.dumps({
+                'message': event['message'],
+                'sender': event['sender'],
+                'timestamp': event['timestamp']
+            }))
+        except Exception as e:
+            logger.error(f"Chat message error: {str(e)}", exc_info=True)

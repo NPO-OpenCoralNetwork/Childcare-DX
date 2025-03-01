@@ -151,6 +151,11 @@ CHANNEL_LAYERS = {
             'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
             'HOST': os.getenv('DB_HOST', 'localhost'),
             'PORT': os.getenv('DB_PORT', '5432'),
+            'CAPACITY': 1000,
+            'EXPIRY': 60,
+            'GROUP_EXPIRY': 60,
+            'RETRY_DELAY': 1.0,
+            'MAX_RETRIES': 3,
             'CONN_MAX_AGE': 0,
             'OPTIONS': {
                 'connect_timeout': 20,
