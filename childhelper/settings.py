@@ -144,7 +144,8 @@ SITE_ID = 1
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
+        'CONFIG': dj_database_url.parse(os.environ.get('DATABASE_URL')),
     },
 }
 import dj_database_url
