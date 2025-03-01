@@ -13,37 +13,37 @@
         <a href="{% url 'search_allowed' %}" class="feature-card">
             <div class="icon">📍</div>
             <h3>認可保育施設検索</h3>
-            <p>近くの認可保育施設や子育て支援施設を簡単に探せます</p>
+            <p>近くの認可保育施設や子育て支援施設を探す</p>
         </a>
     
         <a href="{% url 'search_disallowed' %}" class="feature-card">
             <div class="icon">🚩</div>
             <h3>認可外保育施設検索</h3>
-            <p>近くの認可外保育施設や子育て支援施設を簡単に探せます</p>
+            <p>近くの認可外保育施設や子育て支援施設を探す</p>
         </a>
     
         <a href="{% url 'inquiry_list' %}" class="feature-card">
             <div class="icon">🎧</div>
             <h3>相談一覧</h3>
-            <p>子育てに関するみんなの悩みを見てみましょう</p>
+            <p>子育てに関するみんなの悩みを見る</p>
         </a>
     {% if user.is_authenticated and user.user_type == 'inquirer' %}
         <a href="{% url 'inquiry_create' %}" class="feature-card">
             <div class="icon">📪</div>
             <h3>相談を投稿</h3>
-            <p>子育てに関する悩みを相談してみましょう</p>
+            <p>子育てに関する悩みを相談する</p>
         </a>
     {% endif %}
         <a href="{% url 'chat_list' %}" class="feature-card">
             <div class="icon">💬</div>
             <h3>チャット</h3>
-            <p>信頼できる相談相手と話しましょう</p>
+            <p>信頼できる相談相手と話す</p>
         </a>
 
         <a href="{% url 'child_support_list' %}" class="feature-card">
             <div class="icon">📺</div>
             <h3>子育て支援情報</h3>
-            <p>子育てに関する情報をみてみましょう</p>
+            <p>子育てに関する情報をみる</p>
         </a>
     </div>
  

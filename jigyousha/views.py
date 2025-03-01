@@ -3,7 +3,7 @@ from django.db.models import Q
 from .models import allowed,disallowed
 from django.http import JsonResponse
 from django.core.paginator import Paginator
-
+from django.conf import settings
 
 def search_allowed(request):
     todofuken = request.GET.get('todofuken')
@@ -11,7 +11,7 @@ def search_allowed(request):
     # service_types = request.GET.getlist('service_type')
     keyword = request.GET.get('keyword')
 
-    queryset = allowed.objects.none()  # デフォルトで空のクエリセットを設定
+    queryset = allowed.objects.none() 
 
     if todofuken or shichoson  or keyword:
         queryset = allowed.objects.all()
@@ -63,8 +63,19 @@ def search_allowed(request):
         if keyword:
             queryset = queryset.filter(Q(service_type__icontains=keyword))
 
-    # 都道府県のリストを取得
-    todofuken_list = allowed.objects.values_list('facility_address_pref', flat=True).distinct()
+    todofuken_list = list(
+    disallowed.objects.filter(address_pref__isnull=False)
+    .values_list('facility_address_pref', flat=True)
+    .distinct()
+     )
+    prefecture_order = [
+    '北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県',
+    '石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県',
+    '和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県',
+    '大分県','宮崎県','鹿児島県','沖縄県'
+     ]
+    order_map = {pref: index for index, pref in enumerate(prefecture_order)}
+    sorted_pref_list = sorted(todofuken_list, key=lambda x: order_map.get(x, 999))
     shichoson_list = []
     if todofuken:
         shichoson_list = allowed.objects.filter(facility_address_pref=todofuken).values_list('facility_address_city', flat=True).distinct()
@@ -74,7 +85,7 @@ def search_allowed(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'jigyousha/search_allowed.html', {
         'results': queryset,
-        'todofuken_list': todofuken_list,
+        'todofuken_list': sorted_pref_list,
         'shichoson_list': shichoson_list,
         'selected_todofuken': todofuken,
         'selected_shichoson': shichoson,
@@ -85,7 +96,7 @@ def search_allowed(request):
 
 
 def search_disallowed(request):
-    todofuken = request.GET.get('todofuken', '選択してください')
+    todofuken = request.GET.get('todofuken')
     shichoson = request.GET.get('shichoson')
     # service_types = request.GET.getlist('service_type')
     keyword = request.GET.get('keyword')
@@ -105,7 +116,20 @@ def search_disallowed(request):
             queryset = queryset.filter(Q(service_type__icontains=keyword))
 
     # 都道府県のリストを取得
-    todofuken_list = disallowed.objects.values_list('address_pref', flat=True).distinct()
+    prefecture_order = [
+    '北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県',
+    '石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県',
+    '和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県',
+    '大分県','宮崎県','鹿児島県','沖縄県'
+     ]
+    todofuken_list = list(
+    disallowed.objects.filter(address_pref__isnull=False)
+    .values_list('address_pref', flat=True)
+    .distinct()
+     )
+
+    order_map = {pref: index for index, pref in enumerate(prefecture_order)}
+    sorted_pref_list = sorted(todofuken_list, key=lambda x: order_map.get(x, 999))
     shichoson_list = []
     if todofuken:
         shichoson_list = disallowed.objects.filter(address_pref=todofuken).values_list('address_city', flat=True).distinct()
@@ -115,7 +139,7 @@ def search_disallowed(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'jigyousha/search_disallowed.html', {
         'results': queryset,
-        'todofuken_list': todofuken_list,
+        'todofuken_list': sorted_pref_list,
         'shichoson_list': shichoson_list,
         'selected_todofuken': todofuken,
         'selected_shichoson': shichoson,
@@ -126,11 +150,11 @@ def search_disallowed(request):
 
 def allowed_detail(request, pk):
     facility = get_object_or_404(allowed, pk=pk)
-    return render(request, 'jigyousha/allowed_detail.html', {'facility': facility})
+    return render(request, 'jigyousha/allowed_detail.html', {'facility': facility,'google_api_key': settings.GOOGLE_API_KEY})
 
 def disallowed_detail(request, pk):
     facility = get_object_or_404(disallowed, pk=pk)
-    return render(request, 'jigyousha/disallowed_detail.html', {'facility': facility})
+    return render(request, 'jigyousha/disallowed_detail.html', {'facility': facility,'google_api_key':settings.GOOGLE_API_KEY})
 
 def get_shichoson(request):
     todofuken = request.GET.get('todofuken')
@@ -146,18 +170,4 @@ def get_shichoson(request):
     else:
         return JsonResponse({'error': 'No todofuken provided'}, status=400)
 
-
-# def get_sshichoson(request):
-#     todofuken = request.GET.get('prefecture_name')
-#     if todofuken:
-#         shichoson_list = (
-#             allowed.objects
-#             .filter(todofuken_name=todofuken)
-#             .values_list('city_name', flat=True)
-#             .distinct()
-#             .order_by('city_name')
-#         )
-#         return JsonResponse(list(shichoson_list), safe=False)
-#     else:
-#         return JsonResponse({'error': 'No todofuken provided'}, status=400)
     

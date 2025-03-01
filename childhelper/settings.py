@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # # または、特定のオリジンだけを許可する場合
