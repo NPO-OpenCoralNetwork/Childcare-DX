@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}サイトポリシー - テトテトッテ{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/site_policy.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <h1>サイトポリシー</h1>
+
+    <section class="policy-section">
+        <h2>1. プライバシーポリシー</h2>
+        <h3>個人情報の取り扱いについて</h3>
+        <p>当サイトでは、以下の目的で個人情報を収集・利用します：</p>
+        <ul>
+            <li>ユーザー登録およびアカウント管理</li>
+            <li>サービスの提供および改善</li>
+            <li>お問い合わせ対応</li>
+            <li>利用状況の分析</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>2. 情報セキュリティ</h2>
+        <p>当サイトでは、以下の対策を実施しています：</p>
+        <ul>
+            <li>SSL暗号化通信の使用</li>
+            <li>定期的なセキュリティ更新</li>
+            <li>アクセス制限の実施</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>3. 著作権について</h2>
+        <p>当サイトのコンテンツの著作権は当サイトに帰属します。ただし、ユーザーが投稿したコンテンツの著作権は、投稿者に帰属します。</p>
+    </section>
+
+    <section class="policy-section">
+        <h2>4. 免責事項</h2>
+        <ul>
+            <li>当サイトの情報の正確性について保証するものではありません</li>
+            <li>ユーザー間のトラブルについて、当サイトは責任を負いません</li>
+            <li>予告なくサービス内容を変更する場合があります</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>5. クッキーの使用について</h2>
+        <p>当サイトでは、ユーザー体験の向上のためにクッキーを使用しています。</p>
+    </section>
+</div>
+{% endblock %}

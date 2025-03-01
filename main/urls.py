@@ -6,6 +6,8 @@ urlpatterns = [
     path('announcement/<int:pk>/', views.announcement_detail_view, name='announcement_detail'),
     path('child-support/', views.child_support_list, name='child_support_list'),
     path('child-support/<int:pk>/', views.child_support_detail, name='child_support_detail'),
-        path('contact/', views.ContactFormView.as_view(), name='contact'),
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('contact/result/', views.ContactResultView.as_view(), name='contact_result'),
+    path('guidelines/', views.SiteGuidelinesView.as_view(), name='site_guidelines'),
+    path('policy/', views.SitePolicyView.as_view(), name='site_policy'),
 ]

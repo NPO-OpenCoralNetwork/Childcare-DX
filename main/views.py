@@ -92,3 +92,9 @@ class ContactResultView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['success'] = ("メッセージが送信されました。")
         return context
+
+class SiteGuidelinesView(TemplateView):
+    template_name = 'main/site_guidelines.html'
+
+class SitePolicyView(TemplateView):
+    template_name = 'main/site_policy.html'

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}サイト利用注意事項 - テトテトッテ{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/site_policy.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <h1>サイト利用注意事項</h1>
+
+    <section class="policy-section">
+        <h2>1. 利用にあたっての基本事項</h2>
+        <p>本サイトは、子育て支援を目的としたコミュニティプラットフォームです。安全で有意義な利用のため、以下の事項をお守りください。</p>
+    </section>
+
+    <section class="policy-section">
+        <h2>2. 禁止事項</h2>
+        <ul>
+            <li>個人情報の不適切な開示や共有</li>
+            <li>誹謗中傷や差別的な発言</li>
+            <li>営利目的での利用</li>
+            <li>虚偽の情報の投稿</li>
+            <li>著作権等の知的財産権の侵害</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>3. 安全な利用について</h2>
+        <ul>
+            <li>パスワードの適切な管理</li>
+            <li>不審な活動の報告</li>
+            <li>適切な情報共有の範囲</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>4. 投稿内容について</h2>
+        <p>以下の内容を含む投稿は禁止されています：</p>
+        <ul>
+            <li>違法行為に関する内容</li>
+            <li>個人のプライバシーを侵害する内容</li>
+            <li>著作権を侵害する内容</li>
+            <li>その他、公序良俗に反する内容</li>
+        </ul>
+    </section>
+</div>
+{% endblock %}
