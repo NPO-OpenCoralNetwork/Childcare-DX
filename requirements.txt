@@ -46,3 +46,4 @@ python-dotenv
 gunicorn
 psycopg2-binary
 dj-database-url
+channels_postgres
