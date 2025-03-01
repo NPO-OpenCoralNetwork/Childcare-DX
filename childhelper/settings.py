@@ -139,21 +139,13 @@ STRIPE_SECRET_KEY = 'your_secret_key_here'
 STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 
 WSGI_APPLICATION = 'childhelper.wsgi.application'
-ASGI_APPLICATION = 'childhelper.asgi.application'
+
 SITE_ID = 1
 
 CHANNEL_LAYERS = {
-'default': {
-    'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
-    'CONFIG': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST', 'localhost'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
-},
 }
 import dj_database_url
 DATABASES = {
