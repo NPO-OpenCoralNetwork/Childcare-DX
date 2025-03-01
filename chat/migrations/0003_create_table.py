@@ -2,7 +2,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('chat', '0001_initial'),  # 既存のマイグレーションに依存
+        ('chat', '0002_rename_timestamp_chat_created_at_remove_chat_message_and_more'),  # 依存関係を最新のマイグレーションに更新
     ]
 
     operations = [
