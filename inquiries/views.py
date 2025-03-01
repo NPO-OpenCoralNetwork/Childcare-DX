@@ -53,11 +53,16 @@ class InquiryDetailView(DetailView):
     template_name = 'inquiries/inquiry_detail.html'
     context_object_name = 'inquiry'
     
-    def get_object(self):
-        inquiry = super().get_object()
-        # 閲覧数を増加させる
+    def get_object(self, queryset=None):
+        
+        if hasattr(self, '_inquiry_object'):
+            return self._inquiry_object
+            
+        inquiry = super().get_object(queryset)
         inquiry.views += 1
         inquiry.save()
+              
+        self._inquiry_object = inquiry
         return inquiry
     
         
