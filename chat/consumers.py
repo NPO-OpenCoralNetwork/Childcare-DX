@@ -3,27 +3,33 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import Chat, Message
 from django.utils import timezone  # タイムスタンプ用
+import logging
 
+logger = logging.getLogger(__name__)
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         try:
+            # 早期にacceptを実行
+            await self.accept()
+            
             self.room_name = self.scope['url_route']['kwargs']['room_name']
             self.room_group_name = f'chat_{self.room_name}'
 
-            # ユーザー認証の確認を追加
             if self.scope["user"].is_anonymous:
+                logger.warning("Anonymous user connection rejected")
                 await self.close()
                 return
 
+            # グループへの追加を試みる
             await self.channel_layer.group_add(
                 self.room_group_name,
                 self.channel_name
             )
-            await self.accept()
-            print(f"WebSocket connected: {self.room_group_name}")  # デバッグ用
+            
+            logger.info(f"WebSocket connected: {self.room_group_name}")
 
         except Exception as e:
-            print(f"Connection error: {str(e)}")  # デバッグ用
+            logger.error(f"Connection error: {str(e)}", exc_info=True)
             await self.close()
 
     async def receive(self, text_data):

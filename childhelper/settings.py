@@ -151,8 +151,20 @@ CHANNEL_LAYERS = {
             'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
             'HOST': os.getenv('DB_HOST', 'localhost'),
             'PORT': os.getenv('DB_PORT', '5432'),
+            'CONN_MAX_AGE': 0,
+            'OPTIONS': {
+                'connect_timeout': 20,
+        
         },
     },
+}
+}
+CHANNELS_WS_PROTOCOLS = ['websocket']
+CHANNEL_SETTINGS = {
+    'ROUTING': 'chat.routing.websocket_urlpatterns',
+    'MIDDLEWARE': [
+        'channels.middleware.BaseMiddleware',
+    ],
 }
 DATABASES = {
     'default': 

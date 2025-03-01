@@ -1,1 +1,1 @@
-web: daphne childhelper.asgi:application --port $PORT --bind 0.0.0.0 -v2
+web: daphne -b 0.0.0.0 -p $PORT --websocket-timeout 60 --proxy-headers childhelper.asgi:application
