@@ -12,7 +12,22 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
 }
+.popular-inquiries-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid var(--primary-color);
+}
 
+.popular-inquiries-section h2 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.views-count {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+}
 
 .inquiry-list {
     list-style: none;
@@ -142,6 +157,16 @@ h2 {
     .inquiry-item {
         padding: 8px;
         font-size: 0.9em;
+    }
+    .popular-inquiries-section {
+        margin-top: 30px;
+        padding-top: 15px;
+    }
+
+    .views-count {
+        display: block;
+        margin-left: 0;
+        font-size: 0.8em;
     }
 }
 

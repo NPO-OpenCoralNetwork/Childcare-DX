@@ -10,6 +10,8 @@ from accounts.models import UserProfile
 from django.core.mail import send_mail
 from django.contrib import messages
 from childhelper import settings
+from django.core.paginator import Paginator
+
 
 class InquiryListView(ListView):
     model = Inquiry
@@ -38,6 +40,11 @@ class InquiryListView(ListView):
         context['tags'] = Tag.objects.all()
         context['selected_tags'] = self.request.GET.getlist('tags')
         context['query'] = self.request.GET.get('q', '')
+        popular_page = self.request.GET.get('popular_page', 1)
+        popular_inquiries = Inquiry.objects.order_by('-views')
+        popular_paginator = Paginator(popular_inquiries, 10)
+        context['popular_inquiries'] = popular_paginator.get_page(popular_page)
+        
         return context
 
 
