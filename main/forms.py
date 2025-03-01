@@ -28,13 +28,36 @@ class ContactForm(forms.Form):
     )
 
     def send_email(self):
-        subject = "お問い合わせ"
-        message = self.cleaned_data['message']
         name = self.cleaned_data['name']
         email = self.cleaned_data['email']
-        from_email = '{name} <{email}>'.format(name=name, email=email)
-        recipient_list = [settings.EMAIL_HOST_USER]  
+        message = self.cleaned_data['message']
+        
+        # メール本文にユーザー情報を含める
+        email_body = f"""
+    お問い合わせがありました。
+    
+    【お名前】
+    {name}
+    
+    【メールアドレス】
+    {email}
+    
+    【メッセージ】
+    {message}
+        """
+        
+        subject = "お問い合わせ"
+        from_email = settings.DEFAULT_FROM_EMAIL  # サイトのデフォルトメールアドレスを使用
+        recipient_list = [settings.EMAIL_HOST_USER]
+        
+        
         try:
-            send_mail(subject, message, from_email, recipient_list)
+            send_mail(
+                subject=subject,
+                message=email_body,
+                from_email=from_email,
+                recipient_list=recipient_list,
+                
+            )
         except BadHeaderError:
             return HttpResponse("無効なヘッダが検出されました。")

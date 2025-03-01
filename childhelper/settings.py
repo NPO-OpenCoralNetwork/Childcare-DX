@@ -83,7 +83,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'coralnetwork.contact@gmail.com'
 EMAIL_HOST_PASSWORD = 'eukw tvez ggvh joek'
-DEFAULT_FROM_EMAIL = 'coralnetwork.contact@gmail.com'
+DEFAULT_FROM_EMAIL = 'contact@gmail.com'
 
 ROOT_URLCONF = 'childhelper.urls'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
