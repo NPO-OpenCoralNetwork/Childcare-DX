@@ -141,14 +141,14 @@ STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 WSGI_APPLICATION = 'childhelper.wsgi.application'
 
 SITE_ID = 1
-
+import dj_database_url
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
         'CONFIG': dj_database_url.parse(os.environ.get('DATABASE_URL')),
     },
 }
-import dj_database_url
+
 DATABASES = {
     'default': 
         dj_database_url.config(default=os.getenv('DATABASE_URL'))
