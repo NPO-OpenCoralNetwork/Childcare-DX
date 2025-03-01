@@ -141,19 +141,19 @@ STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 WSGI_APPLICATION = 'childhelper.wsgi.application'
 ASGI_APPLICATION = 'childhelper.asgi.application'
 SITE_ID = 1
-db_config = dj_database_url.config(default=os.getenv('DATABASE_URL'))
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
-        'CONFIG': {
-            'ENGINE': db_config['ENGINE'],
-            'NAME': db_config['NAME'],
-            'USER': db_config['USER'],
-            'PASSWORD': db_config['PASSWORD'],
-            'HOST': db_config['HOST'],
-            'PORT': db_config['PORT'],
-        },
+'default': {
+    'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
+    'CONFIG': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST', 'localhost'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     },
+},
 }
 import dj_database_url
 DATABASES = {
