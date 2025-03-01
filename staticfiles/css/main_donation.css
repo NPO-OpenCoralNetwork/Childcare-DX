@@ -43,3 +43,69 @@
 .donation-type a:hover {
     background-color: #d2e479;
 }
+@media (max-width: 768px) {
+    .home-container {
+        padding: 20px;
+    }
+
+    .home-container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .home-container p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .donation-type-container {
+        gap: 20px;
+    }
+
+    .donation-type {
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .donation-type h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .donation-type p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .donation-type a {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
+
+/* さらに小さい画面サイズ用 */
+@media (max-width: 480px) {
+    .home-container {
+        padding: 15px;
+    }
+
+    .donation-type {
+        padding: 12px;
+    }
+
+    .donation-type h3 {
+        font-size: 1.1rem;
+    }
+
+    .donation-type p {
+        font-size: 0.85rem;
+    }
+
+    .donation-type a {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
