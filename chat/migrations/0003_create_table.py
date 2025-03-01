@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 expires TIMESTAMP WITH TIME ZONE
             );
 
-            CREATE TABLE IF NOT EXISTS channels_postgres_group (
+            CREATE TABLE IF NOT EXISTS channels_postgres_groupchannel (
                 group_name TEXT PRIMARY KEY,
                 created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             );
