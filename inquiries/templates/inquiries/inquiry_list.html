@@ -61,6 +61,7 @@
     </form>
 
     <!-- 検索結果表示 -->
+    {% if query or selected_tags %}
     {% if inquiries %}
         <ul class="inquiry-list">
             {% for inquiry in inquiries %}
@@ -100,6 +101,7 @@
     {% else %}
         <p class="no-inquiry">該当する相談がありません。</p>
     {% endif %}
+{% endif %}
 </div>
 
 <script>
