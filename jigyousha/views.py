@@ -64,7 +64,7 @@ def search_allowed(request):
             queryset = queryset.filter(Q(service_type__icontains=keyword))
 
     todofuken_list = list(
-    disallowed.objects.filter(address_pref__isnull=False)
+    allowed.objects.filter(facility_address_pref__isnull=False)
     .values_list('facility_address_pref', flat=True)
     .distinct()
      )
@@ -76,6 +76,7 @@ def search_allowed(request):
      ]
     order_map = {pref: index for index, pref in enumerate(prefecture_order)}
     sorted_pref_list = sorted(todofuken_list, key=lambda x: order_map.get(x, 999))
+   
     shichoson_list = []
     if todofuken:
         shichoson_list = allowed.objects.filter(facility_address_pref=todofuken).values_list('facility_address_city', flat=True).distinct()
