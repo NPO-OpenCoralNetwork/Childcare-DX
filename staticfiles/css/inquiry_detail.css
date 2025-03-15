@@ -185,6 +185,14 @@ button:hover {
     font-size: 20px;
     cursor: pointer;
 }
+.three-dots-button2 {
+    background-color: #d2e479;
+    width: 30px;
+    height: 40px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
 
 /* メニューコンテンツ */
 .menu-content {

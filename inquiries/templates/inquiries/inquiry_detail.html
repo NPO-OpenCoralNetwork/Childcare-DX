@@ -46,7 +46,7 @@
     <div class="responses-container">
         {% for response in responses.all %}
         <div class="menu-container">
-            <button class="three-dots-button" onclick="toggleMenu2('{{ response.id }}')">⋮</button>
+            <button class="three-dots-button2" onclick="toggleMenu2('{{ response.id }}')">⋮</button>
             <div id="menu-content{{ response.id }}" class="menu-content">
             
             {% if response.user == user %}
@@ -128,6 +128,16 @@ function closeReportForm() {
 
 window.onclick = function(event) {
     if (!event.target.matches('.three-dots-button')) {
+        const menus = document.getElementsByClassName("menu-content");
+        for (let i = 0; i < menus.length; i++) {
+            if (menus[i].classList.contains('active')) {
+                menus[i].classList.remove('active');
+            }
+        }
+    }
+}
+window.onclick = function(event) {
+    if (!event.target.matches('.three-dots-button2')) {
         const menus = document.getElementsByClassName("menu-content");
         for (let i = 0; i < menus.length; i++) {
             if (menus[i].classList.contains('active')) {
