@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'donation',
     'api',
     'channels',
+    'channels_postgres',
     'rest_framework',
     'rest_framework.authtoken',
     'cloudinary', 
