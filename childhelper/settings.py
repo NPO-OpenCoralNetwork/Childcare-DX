@@ -16,7 +16,7 @@ from datetime import timedelta
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'donation',
     'api',
     'channels',
+    'channels-postgres',
     'rest_framework',
     'rest_framework.authtoken',
     'cloudinary', 
@@ -141,29 +142,15 @@ STRIPE_PUBLISHABLE_KEY = 'your_publishable_key_here'
 WSGI_APPLICATION = 'childhelper.wsgi.application'
 ASGI_APPLICATION = 'childhelper.asgi.application'
 SITE_ID = 1
-import dj_database_url
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
-        'CONFIG': {
-            'NAME': os.getenv('DB_NAME', 'postgres'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-            'CAPACITY': 1000,
-            'EXPIRY': 60,
-            'GROUP_EXPIRY': 60,
-            'RETRY_DELAY': 1.0,
-            'MAX_RETRIES': 3,
-            'CONN_MAX_AGE': 0,
-            'OPTIONS': {
-                'connect_timeout': 20,
-        
-        },
-    },
-}
-}
+      'default': {
+          'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
+          'CONFIG': {
+              'database': 'channels_postgres',
+          },
+      },
+  }
 CHANNELS_WS_PROTOCOLS = ['websocket']
 CHANNEL_SETTINGS = {
     'ROUTING': 'chat.routing.websocket_urlpatterns',
