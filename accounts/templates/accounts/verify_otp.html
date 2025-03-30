@@ -12,5 +12,8 @@
         {{ form.as_p }}
         <button type="submit">送信</button>
     </form>
+    {% if is_registration %}
+    <p>OTPが届かない場合は、<a href="{% url 'resend_registration_otp' %}">こちら</a>から再送信してください。</p>
+    {% endif %}
 </div>
 {% endblock %}
