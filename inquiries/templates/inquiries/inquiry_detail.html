@@ -45,10 +45,11 @@
 
     <div class="responses-container">
         {% for response in responses.all %}
-        <div class="menu-container">
+        
 
             
             {% if response.user == user %}
+            <div class="menu-container">
             <button class="three-dots-button" onclick="toggleMenu2('{{ response.id }}')">⋮</button>
             <div id="menu-content{{ response.id }}" class="menu-content">
             <form method="post" class="delete-response-form">

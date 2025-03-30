@@ -43,7 +43,7 @@ class ContactForm(forms.Form):
                 subject=subject,
                 message=message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
+                recipient_list=[settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
         except BadHeaderError:
