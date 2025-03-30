@@ -33,12 +33,12 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # # または、特定のオリジンだけを許可する場合
-# CORS_ALLOWED_ORIGINS = [
-#     'https://hoikuapp-7e0adfa07d71.herokuapp.com',
-#     'http://127.0.0.1'
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'https://hoikuapp-7e0adfa07d71.herokuapp.com',
+    'http://127.0.0.1'
+]
 
-# CSRF_TRUSTED_ORIGINS = ['https://hoikuapp-7e0adfa07d71.herokuapp.com','http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://hoikuapp-7e0adfa07d71.herokuapp.com','http://127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.UserProfile'
 
