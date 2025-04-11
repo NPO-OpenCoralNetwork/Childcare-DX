@@ -28,7 +28,14 @@ h2 {
     border-radius: 8px;
     background-color: #F9F9F9;
 }
+#send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
+#send:not(:disabled) {
+    cursor: pointer;
+}
 /* スクロールバーを非表示にする */
 #chat-log::-webkit-scrollbar {
     display: none;

@@ -30,10 +30,65 @@ h2 {
 }
 
 .inquiry-list {
-    list-style: none;
-    padding: 0;
-    margin: 50px 20px;
-}
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .inquiry-card {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .inquiry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inquiry-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+  
+  .inquiry-title {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+  }
+  
+  .inquiry-metadata {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 15px;
+  }
+  
+  .inquiry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .inquiry-tag {
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
 
 .inquiry-item {
     padding: 10px;
