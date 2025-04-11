@@ -10,37 +10,24 @@ logger = logging.getLogger(__name__)
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         try:
-            self.room_name = self.scope['url_route']['kwargs']['room_name']
-            self.room_group_name = f'chat_{self.room_name}'
-
-            # ユーザー認証チェック
-            if self.scope["user"].is_anonymous:
-                logger.warning("Anonymous user connection rejected")
-                return False
-
-            # 接続を受け入れる
+            # 早期にacceptを実行
             await self.accept()
             
-            try:
-                # グループへの追加を試みる（タイムアウト付き）
-                from asyncio import wait_for
-                await wait_for(
-                    self.channel_layer.group_add(
-                        self.room_group_name,
-                        self.channel_name
-                    ),
-                    timeout=5.0
-                )
-                logger.info(f"Successfully joined group: {self.room_group_name}")
-            except Exception as group_error:
-                logger.error(f"Group add error: {str(group_error)}")
-                await self.close()
-                return
-
-            logger.info(f"WebSocket connected: {self.room_group_name}")
-
+            self.room_name = self.scope['url_route']['kwargs']['room_name']
+            self.room_group_name = f'chat_{self.room_name}'
+    
+            # グループへの追加をタイムアウト付きで実行
+            from asyncio import wait_for
+            await wait_for(
+                self.channel_layer.group_add(
+                    self.room_group_name,
+                    self.channel_name
+                ),
+                timeout=5.0
+            )
+            
         except Exception as e:
-            logger.error(f"Connection error: {str(e)}", exc_info=True)
+            logger.error(f"Connection error: {str(e)}")
             await self.close()
 
     async def disconnect(self, close_code):

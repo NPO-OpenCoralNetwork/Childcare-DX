@@ -1,8 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+:root {
+  /* 暖かみのあるカラーパレット */
+  --primary-color: #FF9E7D;       /* サーモンピンク - メインカラー */
+  --secondary-color: #93D7B7;     /* ミントグリーン - アクセントカラー */
+  --background-color: #FFFBF5;    /* オフホワイト - 背景色 */
+  --card-color: #FFFFFF;          /* 白 - カード背景 */
+  --text-color: #5D5D5D;          /* ダークグレー - テキストの基本色 */
+  --text-light: #7D7D7D;          /* ミディアムグレー - 薄いテキスト */
+  --highlight-color: #FFCD5E;     /* イエロー - ハイライト */
+  --button-color: #93D7B7;        /* ミントグリーン - ボタン色 */
+  --button-hover: #7BC29C;        /* 深いミントグリーン - ホバー時 */
+  --error-color: #FF8A8A;         /* 明るい赤 - エラー表示 */
+  --success-color: #A0E7B1;       /* 明るい緑 - 成功表示 */
+  --border-radius: 12px;          /* 全体的な角丸の大きさ */
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 柔らかい影 */
+}
 body {
+  font-family: 'M PLUS Rounded 1c', 'Kosugi Maru', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h3 {
+  font-family: 'Kosugi Maru', 'M PLUS Rounded 1c', sans-serif;
+  color: var(--highlight-color);
+}
+
+.subtitle {
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #eef8e5;
+  font-weight: 500;
+  color: var(--secondary-color);
 }
 
 header {
@@ -53,8 +82,9 @@ header {
   padding: 10px 0;
 }
 .main-content {
-  padding-bottom: calc(60px + 1rem); /* フッターの高さ + 余白 */
-  min-height: calc(100vh - 60px); /* ビューポートの高さからフッターを引いた高さ */
+  padding-bottom: calc(60px + 1rem); 
+  min-height: calc(100vh - 60px); 
+  
 }
 .login-btn {
   background-color: #007bff;

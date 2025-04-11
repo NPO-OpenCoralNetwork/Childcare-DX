@@ -17,6 +17,9 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv() 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -145,13 +148,23 @@ ASGI_APPLICATION = 'childhelper.asgi.application'
 SITE_ID = 1
 
 CHANNEL_LAYERS = {
-      'default': {
-          'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
-          'CONFIG': {
-              'database': 'channels_postgres',
-          },
-      },
-  }
+    'default': {
+        'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
+        'CONFIG': {
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+            'CAPACITY': 100,
+            'EXPIRY': 3600,
+            'OPTIONS': {
+                'connect_timeout': 30,
+                'keepalives': 1,
+            },
+        },
+    },
+}
 CHANNELS_WS_PROTOCOLS = ['websocket']
 CHANNEL_SETTINGS = {
     'ROUTING': 'chat.routing.websocket_urlpatterns',
