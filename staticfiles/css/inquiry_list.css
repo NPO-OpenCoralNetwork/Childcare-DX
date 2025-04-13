@@ -1,21 +1,22 @@
 .inquiry-list-container {
-    background-color: #FFF6EC; /* ベースカラー */
+    background-color: transparent;
     padding: 20px;
+    border: solid 2px #fff; 
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
     max-width: 800px;
-    margin: 50px auto; /* 中央揃え */
+    margin: 10px auto; /* 中央揃え */
 }
 
 h2 {
-    color: #797a94; /* テキストカラー */
+    color: #fff; /* テキストカラー */
     text-align: center;
     margin-bottom: 20px;
 }
 .popular-inquiries-section {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 2px solid var(--primary-color);
+    border-top: 2px solid white;
 }
 
 .popular-inquiries-section h2 {
@@ -30,65 +31,10 @@ h2 {
 }
 
 .inquiry-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-  }
-  
-  .inquiry-card {
-    background-color: var(--card-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .inquiry-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .inquiry-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background-color: var(--primary-color);
-  }
-  
-  .inquiry-title {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    color: var(--primary-color);
-  }
-  
-  .inquiry-metadata {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-top: 15px;
-  }
-  
-  .inquiry-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
-  }
-  
-  .inquiry-tag {
-    background-color: var(--secondary-color);
-    color: white;
-    font-size: 0.75rem;
-    padding: 3px 8px;
-    border-radius: 20px;
-  }
+    list-style: none;
+    padding: 0;
+    margin: 50px 20px;
+}
 
 .inquiry-item {
     padding: 10px;
@@ -124,7 +70,7 @@ h2 {
 
 .search-button {
     padding: 10px 20px;
-    background-color: #d2e479;
+    background-color: var(--highlight-color); /* アクセントカラー */
     color: #FFF6EC;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -191,7 +137,7 @@ h2 {
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
-    background-color: #d2e479;
+    background-color: var(--highlight-color);
     color: #FFF6EC;
     transition: background-color 0.3s ease;
 }

@@ -244,23 +244,26 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# filepath: /c:/Users/yoshiro naka/Desktop/childapp/childcare/childhelper/settings.py
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-        'chat': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
+        'django': {'level': 'INFO'},
+        'chat': {'level': 'DEBUG'},
+        'channels': {'level': 'DEBUG'},
+        'channels_postgres': {'level': 'DEBUG'},
     },
 }

@@ -1,26 +1,27 @@
 :root {
-    --primary-color: #c0d26e;      /* 以前の #d2e479 より少し深みを持たせた柔らかい黄緑 */
-    --secondary-color: #5a4e7c;    /* 以前の #797a94 よりも濃く、補色に近い引き締まった紫 */
-    --background-color: #FFF6EC;   /* 背景色はそのまま */
-    --text-color: #333;            /* テキストカラーはそのまま */
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  /* 暖かみのあるカラーパレット */
+  --primary-color: #FF9E7D;       /* サーモンピンク - メインカラー */
+  --secondary-color: #93D7B7;     /* ミントグリーン - アクセントカラー */
+  --background-color: #FFFBF5;    /* オフホワイト - 背景色 */
+  --card-color: #FFFFFF;          /* 白 - カード背景 */
+  --text-color: #5D5D5D;          /* ダークグレー - テキストの基本色 */
+  --text-light: #7D7D7D;          /* ミディアムグレー - 薄いテキスト */
+  --highlight-color: #FFCD5E;     /* イエロー - ハイライト */
+  --button-color: #93D7B7;        /* ミントグリーン - ボタン色 */
+  --button-hover: #7BC29C;        /* 深いミントグリーン - ホバー時 */
+  --error-color: #FF8A8A;         /* 明るい赤 - エラー表示 */
+  --success-color: #A0E7B1;       /* 明るい緑 - 成功表示 */
+  --border-radius: 12px;          /* 全体的な角丸の大きさ */
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 柔らかい影 */
+}
   
-  /* ===== 全体設定 ===== */
-  body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-  }
   
   /* ===== ページラッパー ===== */
   .page-wrapper {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+  
     border-radius: 8px;
     box-shadow: var(--shadow);
   }
@@ -29,10 +30,11 @@
   .search-container {
     text-align: center;
     margin-bottom: 30px;
+
   }
   .search-container h2 {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--card-color);
     margin-bottom: 20px;
   }
   
@@ -43,8 +45,8 @@
     justify-content: center;
     gap: 15px;
     padding: 15px;
-    background-color: rgba(192, 210, 110, 0.35); /* --primary-color の透明度を調整 */
-    border: 1px solid rgba(192, 210, 110, 0.7);
+    background-color: transparent;
+    border: solid 5px white;
     border-radius: 8px;
   }
   .form-group {
@@ -64,7 +66,7 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   .form-control:focus {
-    border-color: var(--primary-color);
+    border-color: var(--secoundary-color);
     outline: none;
     box-shadow: 0 0 5px rgba(192, 210, 110, 0.7);
   }
@@ -74,9 +76,9 @@
   }
   
   .search-button {
-    background-color: var(--primary-color);
+    background-color: var(--highlight-color);
     color: #fff;
-    border: none;
+    border: solid 1px white;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -112,7 +114,7 @@
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
   }
   .card-header {
-    background-color: var(--secondary-color);
+    background-color: var(--highlight-color);
     color: #fff;
     padding: 12px 15px;
     border-top-left-radius: 8px;
@@ -121,6 +123,7 @@
   .card-header h3 {
     margin: 0;
     font-size: 1.2rem;
+    color: white;
   }
   .card-body {
     padding: 15px;
@@ -135,7 +138,7 @@
   .btn.btn-primary {
     display: inline-block;
     padding: 8px 12px;
-    background-color: var(--primary-color);
+    background-color: var(--highlight-color);
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -150,6 +153,8 @@
   .pagination {
     text-align: center;
     margin-top: 20px;
+    margin: 20px auto;
+    width: 60%;
   }
   .pagination .step-links a {
     display: inline-block;
@@ -166,11 +171,14 @@
     background-color: var(--primary-color);
     color: #fff;
   }
+
+  .step-links {
+    margin: 0 auto;
+  }
   .pagination .current {
     display: inline-block;
     padding: 8px 12px;
-    margin: 0 5px;
-    background-color: var(--primary-color);
+    background-color: var(--highlight-color);
     color: #fff;
     border: 1px solid var(--primary-color);
     border-radius: 4px;

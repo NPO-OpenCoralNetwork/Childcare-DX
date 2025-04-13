@@ -18,11 +18,20 @@
 }
 body {
   font-family: 'M PLUS Rounded 1c', 'Kosugi Maru', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
   line-height: 1.6;
 }
-
+  /* メインコンテンツ */
+.main-content {
+    background-image: url('/static/css/bagimg/bg-rice-green.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
+    text-align: center;
+    overflow: auto;
+      
+  }
 h1, h3 {
   font-family: 'Kosugi Maru', 'M PLUS Rounded 1c', sans-serif;
   color: var(--highlight-color);

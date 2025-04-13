@@ -15,7 +15,7 @@
 }
 
 .facility-title {
-    color: var(--secondary-color);
+    color: var(--card-background);
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
